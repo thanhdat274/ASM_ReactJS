@@ -1,13 +1,25 @@
 import { useState } from 'react'
+import { Route, Routes } from 'react-router-dom';
+import AdminLayout from './admin/AdminLayout';
 import './App.css'
+import Home from './client/components/Home';
+import UserLayout from './client/UserLayout';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
-    <div className="App">
+    <>
+      <Routes>
+        <Route path="/" element={<UserLayout />}>
+          <Route index element={<Home />} />
+        </Route>
+        <Route path='/admin' element={<AdminLayout />}>
 
-    </div>
+        </Route>
+      </Routes>
+    </>
   )
 }
 
