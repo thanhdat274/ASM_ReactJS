@@ -1,88 +1,90 @@
-import { Space, Table, Tag } from 'antd';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { Typography, Button, Table, Space } from 'antd';
+import { Link } from 'react-router-dom'
+import { DownOutlined, PlusOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
-import React from 'react';
+import { getAll } from "../../../api/products";
+import { BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs'
 
 interface DataType {
-  key: string;
   name: string;
-  age: number;
-  address: string;
-  tags: string[];
+  saleOffPrice: number;
+  feature: string;
+  description: string;
 }
 
 const columns: ColumnsType<DataType> = [
   {
-    title: 'Name',
+    title: 'Tên sản phẩm',
     dataIndex: 'name',
     key: 'name',
-    render: text => <a>{text}</a>,
+    render: text => <p style={{width: '200px'}}>{text}</p>,
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
+    title: 'Đặc điểm',
+    dataIndex: 'feature',
+    key: 'feature',
+    render: text => <p style={{width: '500px'}}>{text}</p>,
   },
   {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
+    title: 'Giá khuyến mãi',
+    dataIndex: 'saleOffPrice',
+    key: 'saleOffPrice',
   },
   {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: (_, { tags }) => (
-      <>
-        {tags.map(tag => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
+    title: 'Mô tả',
+    dataIndex: 'description',
+    key: 'description',
+    render: text => <p style={{width: '500px'}}>{text}</p>,
   },
   {
     title: 'Action',
     key: 'action',
-    render: (_, record) => (
+    render: () => (
       <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
+        <button style={{border: '0px', fontSize: '20px'}} onClick={() => console.log('ahihi')} ><BsFillTrashFill style={{color: 'red', fontSize: '20px'}}/></button>
+        <button style={{border: '0px', fontSize: '20px'}} onClick={() => console.log('ahihi')} ><BsFillPencilFill style={{color: '#F2DF3A', fontSize: '20px'}}/></button>
       </Space>
     ),
   },
 ];
 
-const data: DataType[] = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-];
 
-const ListPro: React.FC = () => <Table columns={columns} dataSource={data} />;
+
+const ListPro = () => {
+  const [dataTable, setDataTable] = useState([])
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getAll()
+        setDataTable(data.data)
+      } catch (err) {
+
+      }
+    }
+
+    fetchData()
+  }, [])
+  return (
+    <>
+      <Breadcrumb>
+        <Typography.Title level={2} style={{ margin: 0 }}>
+          Danh sách sản phẩm
+        </Typography.Title>
+        <Link to="/admin/products/add">
+          <Button type="dashed" shape="circle" icon={<PlusOutlined />} />
+        </Link>
+      </Breadcrumb>
+      <Table columns={columns} dataSource={dataTable} />
+    </>
+  )
+}
+
+const Breadcrumb = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+`
 
 export default ListPro;

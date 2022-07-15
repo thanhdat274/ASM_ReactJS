@@ -1,62 +1,84 @@
-import { PhoneOutlined, SettingOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu } from 'antd';
+import { AppstoreOutlined } from '@ant-design/icons';
+import {  Menu } from 'antd';
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom'
-import styled from 'styled-components';
-import { FaWeightHanging } from "react-icons/fa";
-import LogoImage from '../assets/images/logo.png'
+import {NavLink } from 'react-router-dom'
 
-const { Header, Content, Sider } = Layout;
-
-const item3: MenuProps['items'] = [
-    {
-        key: "categories", icon: <SettingOutlined />,
-        label: <Link to="/admin/category">Categories</Link>
-    },
-    {
-        key: "cellphone", icon: <FaWeightHanging/>,
-        label: <Link to="/admin">Sản phẩm</Link>
-    },
-]
+const { SubMenu } = Menu;
 
 const MenuAdmin: React.FC = () => (
-    <Layout>
-        <HeaderCustom>
-            <Logo src={LogoImage} />
-        </HeaderCustom>
-        <Layout>
-            <Sider width={200} style={{ height: '100%' }} className="site-layout-background">
-                <Menu
-                    mode="inline"
-                    defaultSelectedKeys={['1']}
-                    defaultOpenKeys={['sub1']}
-                    style={{ height: '100%', borderRight: 0 }}
-                    items={item3}
-                />
-            </Sider>
-            <Layout style={{ padding: '0 24px 24px' }}>
-                <ContentCustom>
-                    <Outlet />
-                </ContentCustom>
-            </Layout>
-        </Layout>
-    </Layout>
+    <Menu
+        mode="inline"
+        defaultSelectedKeys={['1']}
+        defaultOpenKeys={['sub1']}
+        style={{ height: '100%', borderRight: 0 }}
+
+    >
+        <Menu.Item key="sub1" icon={<AppstoreOutlined />} title="Dashboard">
+            <NavLink className="nav-link active" aria-current="page" to="/admin">
+                Dashboard
+            </NavLink>
+        </Menu.Item>
+        <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Quản lí danh mục">
+            <Menu.Item key="8">
+                <NavLink className="" aria-current="page" to="/admin/category">
+                    Danh sách danh mục
+                </NavLink>
+            </Menu.Item>
+            <Menu.Item key="9">
+                <NavLink className="" aria-current="page" to="/admin/category/add">
+                    Thêm mới danh mục
+                </NavLink>
+            </Menu.Item>
+        </SubMenu>
+        <SubMenu key="sub3" icon={<AppstoreOutlined />} title="Quản lí sản phẩm">
+            <Menu.Item key="4">
+                <NavLink className="" aria-current="page" to="/admin/products">
+                    Danh sách sản phẩm
+                </NavLink>
+            </Menu.Item>
+            <Menu.Item key="5">
+                <NavLink className="" aria-current="page" to="/admin/products/add">
+                    Thêm mới sản phẩm
+                </NavLink>
+            </Menu.Item>
+        </SubMenu>
+        <SubMenu key="sub4" icon={<AppstoreOutlined />} title="Quản lí đơn hàng">
+            <Menu.Item key="6">
+                <NavLink className="" aria-current="page" to="/admin/orders">
+                    Danh sách đơn hàng
+                </NavLink>
+            </Menu.Item>
+            <Menu.Item key="7">
+                <NavLink className="" aria-current="page" to="/admin/orders/add">
+                    Thêm mới  đơn hàng
+                </NavLink>
+            </Menu.Item>
+        </SubMenu>
+        <SubMenu key="sub5" icon={<AppstoreOutlined />} title="Quản lí user">
+            <Menu.Item key="2">
+                <NavLink className="" aria-current="page" to="/admin/users">
+                    Danh sách user
+                </NavLink>
+            </Menu.Item>
+            <Menu.Item key="3">
+                <NavLink className="" aria-current="page" to="/admin/users/add">
+                    Thêm mới user
+                </NavLink>
+            </Menu.Item>
+        </SubMenu>
+        <SubMenu key="sub6" icon={<AppstoreOutlined />} title="Quản lí slider">
+            <Menu.Item key="10">
+                <NavLink className="" aria-current="page" to="/admin/sliders">
+                    Danh sách slider
+                </NavLink>
+            </Menu.Item>
+            <Menu.Item key="11">
+                <NavLink className="" aria-current="page" to="/admin/sliders/add">
+                    Thêm mới slider
+                </NavLink>
+            </Menu.Item>
+        </SubMenu>
+    </Menu>
 );
 
-const HeaderCustom = styled(Header)`
-    background-color: #00B0D7;
-    height: 64px;
-    display: flex;
-    align-items: center;
-`
-
-const Logo = styled.img`
-    width: 64px;
-    height: auto;
-`
-
-const ContentCustom = styled(Content)`
-  height: 100%;
-`
 export default MenuAdmin;

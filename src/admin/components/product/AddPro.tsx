@@ -1,85 +1,136 @@
-import { Button, Row, Col, Form, Input, InputNumber, Select } from 'antd';
-import React from 'react';
+import React from "react";
+import styled from "styled-components";
+import { Typography, Col, Row, Button, Checkbox, Form, Input, InputNumber, Select, message } from 'antd'
+import { useNavigate } from "react-router-dom";
+import UploadImage from "./UploadImage";
+import { addPro } from "../../../api/products";
+
+const { TextArea } = Input
+const { Option } = Select;
 
 const AddPro: React.FC = () => {
-    const { Option } = Select;
-    const [form] = Form.useForm()
+	const navigate = useNavigate()
+	const onFinish = async (values: any) => {
+		console.log('Success:', values);
 
-    const handleChange = (value: { value: string; label: React.ReactNode }) => {
-        console.log(value);
-    };
-    const onFinish = (values: any) => {
-        console.log('Success:', values);
-    };
+		try {
+			const data = await addPro(values)
+			message.success("Thêm mới thành công")
+			navigate(-1)
+		} catch (err) {
+			message.error("Có lỗi xảy ra")
+		}
+	};
 
-    const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-    };
+	const onFinishFailed = (errorInfo: any) => {
+		console.log('Failed:', errorInfo);
+	};
+	return (
+		<>
+			<Breadcrumb>
+				<Typography.Title level={2} style={{ margin: 0 }}>
+					Thêm mới sản phẩm
+				</Typography.Title>
+			</Breadcrumb>
+			<Row gutter={16}>
+				<Col span={10}>
+					<UploadImage />
+				</Col>
+				<Col span={14}>
+					<Typography.Title level={3}>Thông tin sản phẩm</Typography.Title>
+					<Form
+						// name="product"
+						initialValues={{}}
+						onFinish={onFinish}
+						onFinishFailed={onFinishFailed}
+						autoComplete="on"
+						labelCol={{ span: 24 }}
+					>
+						<Form.Item
+							name="name"
+							labelCol={{ span: 24 }}
+							label="Tên sản phẩm"
+							rules={[{ required: true, message: 'Tên sản phẩm không được trống' }]}
+						>
+							<Input size="large" />
+						</Form.Item>
 
-    return (
-        <Row>
-            <Col span={12} offset={6}>
-                <Form
-                form={form}
-                    name="basic"
-                    labelCol={{ span: 24 }}
-                    initialValues={{ remember: true }}
-                    onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
-                    autoComplete="off"
-                >
-                    <Form.Item
-                        label="tên sản phẩm"
-                        name="name"
-                        rules={[{ required: true, message: 'Vui lòng nhập tên sản phẩm!' }]}
-                    >
-                        <Input />
-                    </Form.Item>
+						<Row gutter={16}>
+							<Col span={12}>
+								<Form.Item
+									name="originalPrice"
+									label="Giá gốc"
+									labelCol={{ span: 24 }}
+									rules={[{ required: true, message: 'Gía sản phẩm' }]}
+								>
+									<InputNumber style={{ width: '100%' }} size="large" />
+								</Form.Item>
+							</Col>
+							<Col span={12}>
+								<Form.Item
+									name="saleOffPrice"
+									label="Giá giảm"
+									labelCol={{ span: 24 }}
+									rules={[{ required: true, message: 'Gía sản phẩm' }]}
+								>
+									<InputNumber style={{ width: '100%' }} size="large" />
+								</Form.Item>
+							</Col>
+							<Col span={12}>
+								<Form.Item
+									label="Phân loại"
+									name="categories"
+									rules={[{ required: true }]}
+								>
+									<Select style={{ width: '100%' }} size="large">
+										<Option value="phone">Điện thoại</Option>
+										<Option value="laptop">Laptop</Option>
+										<Option value="accessories" disabled>
+											Phụ kiện
+										</Option>
+										<Option value="tablet">Máy tính bảng</Option>
+									</Select>
+								</Form.Item>
+							</Col>
+						</Row>
 
-                    <Form.Item
-                        label="gia sản phẩm"
-                        name="price"
-                        rules={[{ required: true, message: 'Vui òng nhập giá!' }]}
-                    >
-                        <InputNumber style={{ width: '100%' }} />
-                    </Form.Item>
+						<Form.Item
+							name="feature"
+							labelCol={{ span: 24 }}
+							label="Đặc điểm nổi bật"
+							rules={[{ required: true, message: 'Đặc điểm sản phẩm' }]}
+						>
+							<TextArea name="feature" />
+						</Form.Item>
+						<Form.Item
+							name="description"
+							labelCol={{ span: 24 }}
+							label="Mô tả sản phẩm"
+							rules={[{ required: true, message: 'Mô tả sản phẩm' }]}
+						>
+							<TextArea name="description" />
+						</Form.Item>
 
-                    <Form.Item
-                        label="Giá khuyến mại"
-                        name="sale_price"
-                        rules={[{ required: true, message: 'Vui òng nhập giá khuyến mại!' }]}>
+						<Form.Item>
+							<Button type="primary" htmlType="submit">
+								Tạo mới sản phẩm
+							</Button>
+						</Form.Item>
+					</Form>
+				</Col>
+			</Row>
+		</>
+	)
+}
 
-                        <InputNumber style={{ width: '100%' }} />
-                    </Form.Item>
+const Breadcrumb = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+`
 
-                    <Form.Item 
-                     label="Danh mục"
-                     name="cateId"
-                    >
-                        <Select
-                            labelInValue
-                            placeholder="Vui lòng chọn danh mục"
-                            style={{ width: '100%' }}
-                            onChange={handleChange}
-                            allowClear
-                        >   
-                  
-                            <Option value="">Diện thoại</Option>
-                            <Option value="">Laptop</Option>
-                        </Select>
-                    </Form.Item>
-
-                    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                        <Button type="primary" htmlType="submit">
-                            Submit
-                        </Button>
-                    </Form.Item>
-                </Form>
-            </Col>
-        </Row>
-
-
-    );
-};
+const Label = styled.div`
+	font-size: 13px;
+`
 
 export default AddPro;
