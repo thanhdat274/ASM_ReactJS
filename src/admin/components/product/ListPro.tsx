@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Typography, Button, Table, Space } from 'antd';
 import { Link } from 'react-router-dom'
-import { DownOutlined, PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import { getAll } from "../../../api/products";
 import { BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs'
 
 interface DataType {
+  id: string,
   name: string;
   saleOffPrice: number;
   feature: string;
@@ -16,16 +17,21 @@ interface DataType {
 
 const columns: ColumnsType<DataType> = [
   {
+    title: 'ID',
+    dataIndex: 'id',
+    key: 'id',
+  },
+  {
     title: 'Tên sản phẩm',
     dataIndex: 'name',
     key: 'name',
-    render: text => <p style={{width: '200px'}}>{text}</p>,
+    render: text => <p style={{ width: '200px' }}>{text}</p>,
   },
   {
     title: 'Đặc điểm',
     dataIndex: 'feature',
     key: 'feature',
-    render: text => <p style={{width: '500px'}}>{text}</p>,
+    render: text => <p style={{ width: '500px' }}>{text}</p>,
   },
   {
     title: 'Giá khuyến mãi',
@@ -36,15 +42,15 @@ const columns: ColumnsType<DataType> = [
     title: 'Mô tả',
     dataIndex: 'description',
     key: 'description',
-    render: text => <p style={{width: '500px'}}>{text}</p>,
+    render: text => <p style={{ width: '500px' }}>{text}</p>,
   },
   {
     title: 'Action',
     key: 'action',
     render: () => (
       <Space size="middle">
-        <button style={{border: '0px', fontSize: '20px'}} onClick={() => console.log('ahihi')} ><BsFillTrashFill style={{color: 'red', fontSize: '20px'}}/></button>
-        <button style={{border: '0px', fontSize: '20px'}} onClick={() => console.log('ahihi')} ><BsFillPencilFill style={{color: '#F2DF3A', fontSize: '20px'}}/></button>
+        <button style={{ border: '0px', fontSize: '20px' }} onClick={() => console.log('ahihi')} ><BsFillTrashFill style={{ color: 'red', fontSize: '20px' }} /></button>
+        <button style={{ border: '0px', fontSize: '20px' }} onClick={() => console.log('ahihi')} ><BsFillPencilFill style={{ color: '#F2DF3A', fontSize: '20px' }} /></button>
       </Space>
     ),
   },
@@ -60,10 +66,9 @@ const ListPro = () => {
         const data = await getAll()
         setDataTable(data.data)
       } catch (err) {
-
+        console.log(err);
       }
     }
-
     fetchData()
   }, [])
   return (

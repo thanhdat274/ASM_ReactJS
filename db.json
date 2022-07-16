@@ -1,5 +1,10 @@
 {
-  "user": [],
+  "categories": [
+    {
+      "name": "Laptop",
+      "id": 1
+    }
+  ],
   "products": [
     {
       "name": "Apple iPhone 13 Pro Max",

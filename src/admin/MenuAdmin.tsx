@@ -20,12 +20,12 @@ const MenuAdmin: React.FC = () => (
         </Menu.Item>
         <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Quản lí danh mục">
             <Menu.Item key="8">
-                <NavLink className="" aria-current="page" to="/admin/category">
+                <NavLink className="" aria-current="page" to="/admin/categories">
                     Danh sách danh mục
                 </NavLink>
             </Menu.Item>
             <Menu.Item key="9">
-                <NavLink className="" aria-current="page" to="/admin/category/add">
+                <NavLink className="" aria-current="page" to="/admin/categories/add">
                     Thêm mới danh mục
                 </NavLink>
             </Menu.Item>

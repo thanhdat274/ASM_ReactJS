@@ -24,7 +24,7 @@ function App() {
         {/* phần admin */}
         <Route path='admin' element={<AdminLayout />}>
           <Route index element={<Dashboard />} />
-          <Route path='category'>
+          <Route path='categories'>
             <Route index element={<ListCate />} />
             <Route path='add' element={<AddCate />} />
           </Route>
