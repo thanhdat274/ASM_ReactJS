@@ -1,4 +1,4 @@
-import { Button, Checkbox, Col, Form, Input, message, Row, Select, Typography } from 'antd';
+import { Button, Col, Form, Input, message, Row, Typography } from 'antd';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -27,32 +27,31 @@ const AddCate: React.FC = () => {
                 </Typography.Title>
             </Breadcrumb>
             <Row gutter={16}>
-				<Col span={16}>
-					<Form
-						// name="product"
-						initialValues={{}}
-						onFinish={onFinish}
-						onFinishFailed={onFinishFailed}
-						autoComplete="on"
-						labelCol={{ span: 24 }}
-					>
-						<Form.Item
-							name="name"
-							labelCol={{ span: 24 }}
-							label="Tên sản phẩm"
-							rules={[{ required: true, message: 'Tên danh mục không được trống!' }]}
-						>
-							<Input size="large" />
-						</Form.Item>
+                <Col span={16}>
+                    <Form
+                        initialValues={{}}
+                        onFinish={onFinish}
+                        onFinishFailed={onFinishFailed}
+                        autoComplete="on"
+                        labelCol={{ span: 24 }}
+                    >
+                        <Form.Item
+                            name="name"
+                            labelCol={{ span: 24 }}
+                            label="Tên sản phẩm"
+                            rules={[{ required: true, message: 'Tên danh mục không được trống!' }]}
+                        >
+                            <Input size="large" />
+                        </Form.Item>
 
-						<Form.Item>
-							<Button type="primary" htmlType="submit">
-								Thêm mới
-							</Button>
-						</Form.Item>
-					</Form>
-				</Col>
-			</Row>
+                        <Form.Item>
+                            <Button type="primary" htmlType="submit">
+                                Thêm mới
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </Col>
+            </Row>
         </>
     );
 };
@@ -62,9 +61,7 @@ const Breadcrumb = styled.div`
     justify-content: space-between;
     margin: 20px 0;
 `
-
 const Label = styled.div`
 	font-size: 13px;
 `
-
 export default AddCate;

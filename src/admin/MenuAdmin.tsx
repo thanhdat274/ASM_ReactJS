@@ -56,12 +56,12 @@ const MenuAdmin: React.FC = () => (
         </SubMenu>
         <SubMenu key="sub5" icon={<AppstoreOutlined />} title="Quản lí user">
             <Menu.Item key="2">
-                <NavLink className="" aria-current="page" to="/admin/users">
+                <NavLink className="" aria-current="page" to="/admin/user">
                     Danh sách user
                 </NavLink>
             </Menu.Item>
             <Menu.Item key="3">
-                <NavLink className="" aria-current="page" to="/admin/users/add">
+                <NavLink className="" aria-current="page" to="/admin/user/add">
                     Thêm mới user
                 </NavLink>
             </Menu.Item>

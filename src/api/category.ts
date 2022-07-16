@@ -5,7 +5,7 @@ export const listCate = () =>{
     const url = '/categories'
     return instance.get(url);
 }
-export const listOneCate = (id: number) =>{
+export const listOneCate = (id: string) =>{
     const url = `/categories/${id}`
     return instance.get(url);
 }
@@ -17,7 +17,7 @@ export const addCate = (data: any) =>{
     const url = '/categories'
     return instance.post(url, data);
 }
-export const update = (data:any ) => {
+export const update = (data:any) => {
     const url = `/categories/${data.id}` 
     return instance.put(url, data);
 }

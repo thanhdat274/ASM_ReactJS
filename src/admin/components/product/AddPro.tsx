@@ -20,7 +20,6 @@ const AddPro: React.FC = () => {
 			message.error("Có lỗi xảy ra")
 		}
 	};
-
 	const onFinishFailed = (errorInfo: any) => {
 		console.log('Failed:', errorInfo);
 	};
@@ -49,7 +48,7 @@ const AddPro: React.FC = () => {
 							name="name"
 							labelCol={{ span: 24 }}
 							label="Tên sản phẩm"
-							rules={[{ required: true, message: 'Tên sản phẩm không được trống' }]}
+							rules={[{ required: true, message: 'Tên sản phẩm không để trống!' }]}
 						>
 							<Input size="large" />
 						</Form.Item>
@@ -60,7 +59,7 @@ const AddPro: React.FC = () => {
 									name="originalPrice"
 									label="Giá gốc"
 									labelCol={{ span: 24 }}
-									rules={[{ required: true, message: 'Gía sản phẩm' }]}
+									rules={[{ required: true, message: 'Gíá sản phẩm không để trống!' }]}
 								>
 									<InputNumber style={{ width: '100%' }} size="large" />
 								</Form.Item>
@@ -68,46 +67,41 @@ const AddPro: React.FC = () => {
 							<Col span={12}>
 								<Form.Item
 									name="saleOffPrice"
-									label="Giá giảm"
+									label="Giá khuyến mại"
 									labelCol={{ span: 24 }}
-									rules={[{ required: true, message: 'Gía sản phẩm' }]}
+									rules={[{ required: true, message: 'Gía khuyến mại sản phẩm không để trống!' }]}
 								>
 									<InputNumber style={{ width: '100%' }} size="large" />
 								</Form.Item>
 							</Col>
 							<Col span={12}>
 								<Form.Item
-									label="Phân loại"
+									label="Danh mục"
 									name="categories"
 									rules={[{ required: true }]}
 								>
 									<Select style={{ width: '100%' }} size="large">
 										<Option value="phone">Điện thoại</Option>
-										<Option value="laptop">Laptop</Option>
-										<Option value="accessories" disabled>
-											Phụ kiện
-										</Option>
-										<Option value="tablet">Máy tính bảng</Option>
 									</Select>
 								</Form.Item>
 							</Col>
 						</Row>
 
 						<Form.Item
-							name="feature"
+							name="short_desc"
 							labelCol={{ span: 24 }}
-							label="Đặc điểm nổi bật"
-							rules={[{ required: true, message: 'Đặc điểm sản phẩm' }]}
+							label="Mô tả nhỏ sản phẩm"
+							rules={[{ required: true, message: 'Mô tả nhỏ sản phẩm không để trống!' }]}
 						>
-							<TextArea name="feature" />
+							<TextArea name="short_desc" />
 						</Form.Item>
 						<Form.Item
-							name="description"
+							name="desc"
 							labelCol={{ span: 24 }}
 							label="Mô tả sản phẩm"
-							rules={[{ required: true, message: 'Mô tả sản phẩm' }]}
+							rules={[{ required: true, message: 'Mô tả sản phẩm không để trống!' }]}
 						>
-							<TextArea name="description" />
+							<TextArea name="desc" />
 						</Form.Item>
 
 						<Form.Item>
