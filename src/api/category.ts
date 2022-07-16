@@ -13,7 +13,7 @@ export const remove =(id:number)=>{
     const url = `/categories/${id}`
     return instance.delete(url)
 }
-export const add = (data: any) =>{
+export const addCate = (data: any) =>{
     const url = '/categories'
     return instance.post(url, data);
 }

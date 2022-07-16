@@ -3,6 +3,14 @@
     {
       "name": "Laptop",
       "id": 1
+    },
+    {
+      "name": "Diện thoại",
+      "id": 2
+    },
+    {
+      "name": "Máy tính",
+      "id": 3
     }
   ],
   "products": [

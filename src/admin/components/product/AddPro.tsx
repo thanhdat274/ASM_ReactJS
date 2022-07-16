@@ -12,11 +12,10 @@ const AddPro: React.FC = () => {
 	const navigate = useNavigate()
 	const onFinish = async (values: any) => {
 		console.log('Success:', values);
-
 		try {
 			const data = await addPro(values)
 			message.success("Thêm mới thành công")
-			navigate(-1)
+			navigate('/admin/products')
 		} catch (err) {
 			message.error("Có lỗi xảy ra")
 		}
@@ -113,7 +112,7 @@ const AddPro: React.FC = () => {
 
 						<Form.Item>
 							<Button type="primary" htmlType="submit">
-								Tạo mới sản phẩm
+								Thêm mới
 							</Button>
 						</Form.Item>
 					</Form>
