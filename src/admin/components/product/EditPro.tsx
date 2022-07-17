@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { Typography, Col, Row, Button, Checkbox, Form, Input, InputNumber, Select, message } from 'antd'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UploadImage from "./UploadImage";
 import { editPro } from "../../../api/products";
+import { PlusCircleOutlined } from "@ant-design/icons";
 
 const { TextArea } = Input
 const { Option } = Select;
@@ -29,28 +30,45 @@ const EditPro: React.FC = () => {
 		<>
 			<Breadcrumb>
 				<Typography.Title level={2} style={{ margin: 0 }}>
-					Thêm mới sản phẩm
+					Cập nhật sản phẩm
 				</Typography.Title>
 			</Breadcrumb>
-			<Row gutter={16}>
-				<Col span={10}>
-					<UploadImage />
-				</Col>
-				<Col span={14}>
-					<Typography.Title level={3}>Thông tin sản phẩm</Typography.Title>
-					<Form
-						// name="product"
-						initialValues={{}}
-						onFinish={onFinish}
-						onFinishFailed={onFinishFailed}
-						autoComplete="on"
-						labelCol={{ span: 24 }}
-					>
+			<Form
+				initialValues={{}}
+				onFinish={onFinish}
+				onFinishFailed={onFinishFailed}
+				autoComplete="on"
+			>
+				<Row gutter={16}>
+					<Col span={10}>
+						<Form.Item
+							name="img"
+							labelCol={{ span: 24 }}
+							label="Hình ảnh sản phẩm"
+							rules={[{ required: true, message: 'Hình ảnh sản phẩm không để trống!' }]}
+						>
+							{/* <Label>Hình ảnh <span style={{ color: 'red' }}>*</span></Label> */}
+							<UploadWrapper >
+
+								<Button style={{ fontSize: '50px' }} type="dashed" shape="circle" icon={<PlusCircleOutlined style={{ fontSize: '25px' }} />} />
+							</UploadWrapper>
+						</Form.Item>
+						<Form.Item
+							name="desc_img"
+							labelCol={{ span: 24 }}
+							label="Mô tả nhỏ hình ảnh"
+							rules={[{ required: true, message: 'Mô tả nhỏ hình ảnh không để trống!' }]}
+						>
+							<TextArea name="desc_img" />
+						</Form.Item>
+					</Col>
+					<Col span={14}>
+						<Typography.Title level={3}>Thông tin sản phẩm</Typography.Title>
 						<Form.Item
 							name="name"
 							labelCol={{ span: 24 }}
 							label="Tên sản phẩm"
-							rules={[{ required: true, message: 'Tên sản phẩm không được trống' }]}
+							rules={[{ required: true, message: 'Tên sản phẩm không để trống!' }]}
 						>
 							<Input size="large" />
 						</Form.Item>
@@ -61,7 +79,7 @@ const EditPro: React.FC = () => {
 									name="originalPrice"
 									label="Giá gốc"
 									labelCol={{ span: 24 }}
-									rules={[{ required: true, message: 'Gía sản phẩm' }]}
+									rules={[{ required: true, message: 'Gíá sản phẩm không để trống!' }]}
 								>
 									<InputNumber style={{ width: '100%' }} size="large" />
 								</Form.Item>
@@ -69,56 +87,62 @@ const EditPro: React.FC = () => {
 							<Col span={12}>
 								<Form.Item
 									name="saleOffPrice"
-									label="Giá giảm"
+									label="Giá khuyến mại"
 									labelCol={{ span: 24 }}
-									rules={[{ required: true, message: 'Gía sản phẩm' }]}
+									rules={[{ required: true, message: 'Gía khuyến mại sản phẩm không để trống!' }]}
 								>
 									<InputNumber style={{ width: '100%' }} size="large" />
 								</Form.Item>
 							</Col>
+
 							<Col span={12}>
 								<Form.Item
-									label="Phân loại"
+									label="Danh mục"
 									name="categories"
+									labelCol={{ span: 24 }}
 									rules={[{ required: true }]}
 								>
 									<Select style={{ width: '100%' }} size="large">
 										<Option value="phone">Điện thoại</Option>
-										<Option value="laptop">Laptop</Option>
-										<Option value="accessories" disabled>
-											Phụ kiện
-										</Option>
-										<Option value="tablet">Máy tính bảng</Option>
 									</Select>
+								</Form.Item>
+							</Col>
+							<Col span={12}>
+								<Form.Item
+									name="quantity"
+									label="Số lượng"
+									labelCol={{ span: 24 }}
+									rules={[{ required: true, message: 'Số lượng sản phẩm không để trống!' }]}
+								>
+									<InputNumber style={{ width: '100%' }} size="large" />
 								</Form.Item>
 							</Col>
 						</Row>
 
 						<Form.Item
-							name="feature"
+							name="short_desc"
 							labelCol={{ span: 24 }}
-							label="Đặc điểm nổi bật"
-							rules={[{ required: true, message: 'Đặc điểm sản phẩm' }]}
+							label="Mô tả nhỏ sản phẩm"
+							rules={[{ required: true, message: 'Mô tả nhỏ sản phẩm không để trống!' }]}
 						>
-							<TextArea name="feature" />
+							<TextArea name="short_desc" />
 						</Form.Item>
 						<Form.Item
-							name="description"
+							name="desc"
 							labelCol={{ span: 24 }}
 							label="Mô tả sản phẩm"
-							rules={[{ required: true, message: 'Mô tả sản phẩm' }]}
+							rules={[{ required: true, message: 'Mô tả sản phẩm không để trống!' }]}
 						>
-							<TextArea name="description" />
+							<TextArea name="desc" />
 						</Form.Item>
 
 						<Form.Item>
-							<Button type="primary" htmlType="submit">
-								Tạo mới sản phẩm
-							</Button>
+							<Link to='/admin/products'><Button type="primary" htmlType="submit" style={{ marginRight: '20px' }}>Back</Button></Link>
+							<Button type="primary" htmlType="submit">Cập nhật</Button>
 						</Form.Item>
-					</Form>
-				</Col>
-			</Row>
+					</Col>
+				</Row>
+			</Form>
 		</>
 	)
 }
@@ -131,6 +155,16 @@ const Breadcrumb = styled.div`
 
 const Label = styled.div`
 	font-size: 13px;
+`
+
+const UploadWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    border: 1px dashed gray;
+    margin-bottom: 10px;
 `
 
 export default EditPro;
