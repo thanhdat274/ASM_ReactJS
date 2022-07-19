@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Typography, Col, Row, Button, Checkbox, Form, Input, InputNumber, Select, message } from 'antd'
 import { Link, useNavigate } from "react-router-dom";
 import { addPro } from "../../../api/products";
 import { PlusCircleOutlined } from "@ant-design/icons";
+import UploadImage from "./UploadImage";
+import { listCate } from "../../../api/category";
 
 const { TextArea } = Input
 const { Option } = Select;
+interface DataType {
+	id: string,
+	name: string
+}
 
 const AddPro: React.FC = () => {
 	const navigate = useNavigate()
+	const [cate, setCate] = useState<DataType[]>([])
+	useEffect(() => {
+		const getCate = async () => {
+			try {
+				const data = await listCate()
+				setCate(data.data)
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		getCate()
+	}, [])
 	const onFinish = async (values: any) => {
 		console.log('Success:', values);
 		try {
@@ -45,11 +63,7 @@ const AddPro: React.FC = () => {
 							label="Hình ảnh sản phẩm"
 							rules={[{ required: true, message: 'Hình ảnh sản phẩm không để trống!' }]}
 						>
-							{/* <Label>Hình ảnh <span style={{ color: 'red' }}>*</span></Label> */}
-							<UploadWrapper >
-
-								<Button style={{ fontSize: '50px' }} type="dashed" shape="circle" icon={<PlusCircleOutlined style={{ fontSize: '25px' }} />} />
-							</UploadWrapper>
+							<UploadImage />
 						</Form.Item>
 						<Form.Item
 							name="desc_img"
@@ -86,8 +100,19 @@ const AddPro: React.FC = () => {
 								<Form.Item
 									name="saleOffPrice"
 									label="Giá khuyến mại"
+									dependencies={['originalPrice']}
 									labelCol={{ span: 24 }}
-									rules={[{ required: true, message: 'Gía khuyến mại sản phẩm không để trống!' }]}
+									rules={[{ required: true, message: 'Giá khuyến mại sản phẩm không để trống!' },
+									({ getFieldValue }) => ({
+										validator(_, value) {
+											if (!value || getFieldValue('originalPrice') <= value) {
+												return Promise.reject(new Error('Giá khuyến mại phải nhỏ hơn giá gốc!'));
+											} else {
+												return Promise.resolve();
+											}
+										},
+									}),
+									]}
 								>
 									<InputNumber style={{ width: '100%' }} size="large" />
 								</Form.Item>
@@ -101,7 +126,7 @@ const AddPro: React.FC = () => {
 									rules={[{ required: true }]}
 								>
 									<Select style={{ width: '100%' }} size="large">
-										<Option value="phone">Điện thoại</Option>
+										{cate.map((item, index) => <Select.Option value={item.id} key={index + 1}>{item.name}</Select.Option>)}
 									</Select>
 								</Form.Item>
 							</Col>

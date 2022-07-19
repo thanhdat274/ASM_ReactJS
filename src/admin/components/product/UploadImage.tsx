@@ -1,19 +1,51 @@
 import React from "react";
 import styled from "styled-components";
-import {Typography, Button, Input} from 'antd'
-import { PlusCircleOutlined } from '@ant-design/icons';
+import { Typography, Button, Input } from 'antd'
+import { PlusCircleOutlined, PlusSquareOutlined } from '@ant-design/icons';
+import { upload } from "../../../api/images";
+import Upload from "antd/lib/upload/Upload";
 
-const {TextArea} = Input
+const { TextArea } = Input
 
 const UploadImage = () => {
+    const [base64Image, setBase64Image] = React.useState('')
+    const [uploadedImage, setUploadedImage] = React.useState('')
+
+    const handleChangeImage = (event: any) => {
+        const file = event.target.files[0]
+        // previewFile(file)
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onloadend = () => {
+            uploadImage(reader.result)
+        }
+    }
+
+    const uploadImage = async (base64Image: string) => {
+        try {
+            const res = await upload(base64Image)
+            const data = res.data
+            console.log(data)
+            setUploadedImage(data.url)
+        } catch (err) {
+            console.log(err)
+        }
+    }
     return (
         <Container>
-            <Label>Hình ảnh <span style={{color: 'red'}}>*</span></Label>
-            <UploadWrapper >
-                <Button style={{fontSize: '50px'}} type="dashed" shape="circle" icon={<PlusCircleOutlined style={{fontSize: '25px'}} />} />
+            <UploadWrapper>
+                <Upload
+                   
+                    accept="image/png, image/jpg, image/jpeg, image/gif"
+                    name="image" onChange={handleChangeImage}
+                >
+                    <PlusSquareOutlined style={{ fontSize: '40px' }} />
+                </Upload>
+
+                {uploadedImage && (
+                    <ImagePreview style={{}} src={uploadedImage} alt="Image" />
+                )}
             </UploadWrapper>
-            <Label>Mô tả ngắn <span style={{color: 'red'}}>*</span></Label>
-            <TextArea rows={4} placeholder="Mô tả ngắn"/>
         </Container>
     )
 }
@@ -26,7 +58,6 @@ const Label = styled.div`
     font-weight: bold;
     font-size: 13px;
     text-align: left;
-    margin-bottom: 10px;
 `
 
 const UploadWrapper = styled.div`
@@ -34,9 +65,12 @@ const UploadWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 300px;
+    min-height: 200px;
     border: 1px dashed gray;
-    margin-bottom: 10px;
+`
+
+const ImagePreview = styled.img`
+    width: 100%;
 `
 
 export default UploadImage;

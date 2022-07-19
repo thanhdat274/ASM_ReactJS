@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { Typography, Col, Row, Button, Checkbox, Form, Input, InputNumber, Select, message } from 'antd'
 import { Link, useNavigate } from "react-router-dom";
-import UploadImage from "./UploadImage";
 import { editPro } from "../../../api/products";
 import { PlusCircleOutlined } from "@ant-design/icons";
 
