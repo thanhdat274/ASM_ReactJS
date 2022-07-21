@@ -15,15 +15,16 @@
   ],
   "products": [
     {
+      "id": 1,
       "image": "http://res.cloudinary.com/dvj4wwihv/image/upload/v1658421682/cnsqlfzr9ap1epe8locf.png",
       "name": "Nguyễn Thành Đạt",
       "price": 1111111,
       "sale_price": 11111,
       "quantity": 1111,
       "desc_img": "11111111111111",
-      "desc": "1111111111111111111111",
-      "short_desc": "1111111",
-      "id": 1
+      "desc": "1111111gggggđ",
+      "short_desc": "1111111ggg",
+      "cateId": 1
     }
   ]
 }

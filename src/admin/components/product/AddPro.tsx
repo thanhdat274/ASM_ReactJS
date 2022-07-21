@@ -1,28 +1,23 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Typography, Col, Row, Button, Checkbox, Form, Input, InputNumber, Select, message, Upload, UploadFile } from 'antd'
+import { Typography, Col, Row, Button, Form, Input, InputNumber, Select, message, UploadFile } from 'antd'
 import { Link, useNavigate } from "react-router-dom";
 import { addPro } from "../../../api/products";
-import { PlusCircleOutlined, PlusSquareOutlined } from "@ant-design/icons";
-import UploadImage from "./UploadImage";
+import { PlusSquareOutlined } from "@ant-design/icons";
 import { listCate } from "../../../api/category";
 import { upload } from "../../../api/images";
 import { UploadProps } from "antd/es/upload";
 import { RcFile } from "antd/lib/upload";
 import Dragger from "antd/es/upload/Dragger";
+import { CateType } from "../../../type/category";
 
 const { TextArea } = Input
 const { Option } = Select;
-interface DataType {
-	id: string,
-	name: string
-}
-
 
 const AddPro: React.FC = () => {
 	const navigate = useNavigate()
 	const [fileList, setfileList] = useState<UploadFile[] | any>([]);
-	const [cate, setCate] = useState<DataType[]>([])
+	const [cate, setCate] = useState<CateType[]>([])
 	useEffect(() => {
 		const getCate = async () => {
 			try {
@@ -180,8 +175,7 @@ const AddPro: React.FC = () => {
 							<Col span={12}>
 								<Form.Item
 									label="Danh mục"
-									name="categories"
-
+									name="cateId"
 									labelCol={{ span: 24 }}
 									rules={[{ required: true, message: 'Danh mục sản phẩm không để trống!' }]}
 								>
