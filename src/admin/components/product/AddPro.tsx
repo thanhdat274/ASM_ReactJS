@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Typography, Col, Row, Button, Checkbox, Form, Input, InputNumber, Select, message } from 'antd'
+import { Typography, Col, Row, Button, Checkbox, Form, Input, InputNumber, Select, message, Upload, UploadFile } from 'antd'
 import { Link, useNavigate } from "react-router-dom";
 import { addPro } from "../../../api/products";
-import { PlusCircleOutlined } from "@ant-design/icons";
+import { PlusCircleOutlined, PlusSquareOutlined } from "@ant-design/icons";
 import UploadImage from "./UploadImage";
 import { listCate } from "../../../api/category";
+import { upload } from "../../../api/images";
+import { UploadProps } from "antd/es/upload";
+import { RcFile } from "antd/lib/upload";
+import Dragger from "antd/es/upload/Dragger";
 
 const { TextArea } = Input
 const { Option } = Select;
@@ -14,8 +18,10 @@ interface DataType {
 	name: string
 }
 
+
 const AddPro: React.FC = () => {
 	const navigate = useNavigate()
+	const [fileList, setfileList] = useState<UploadFile[] | any>([]);
 	const [cate, setCate] = useState<DataType[]>([])
 	useEffect(() => {
 		const getCate = async () => {
@@ -28,12 +34,27 @@ const AddPro: React.FC = () => {
 		}
 		getCate()
 	}, [])
+
 	const onFinish = async (values: any) => {
 		console.log('Success:', values);
+		const imgLink = await upload(fileList[0]);
+		const valueAdd = {
+			image: imgLink,
+			name: values.name,
+			price: values.price,
+			sale_price: values.sale_price,
+			quantity: values.quantity,
+			desc_img: values.desc_img,
+			desc: values.desc,
+			short_desc: values.short_desc,
+			cateId: values.cateId
+		};
 		try {
-			const data = await addPro(values)
+			const data = await addPro(valueAdd)
 			message.success("Thêm mới thành công")
 			navigate('/admin/products')
+			console.log(data);
+
 		} catch (err) {
 			message.error("Có lỗi xảy ra")
 		}
@@ -41,6 +62,24 @@ const AddPro: React.FC = () => {
 	const onFinishFailed = (errorInfo: any) => {
 		console.log('Failed:', errorInfo);
 	};
+	const handleChangeImage: UploadProps["onChange"] = ({ fileList: newFileList }) => {
+		setfileList(newFileList);
+	};
+	const onPreview = async (file: UploadFile) => {
+		let src = file.url as string;
+		if (!src) {
+			src = await new Promise((resolve) => {
+				const reader = new FileReader();
+				reader.readAsDataURL(file.originFileObj as RcFile);
+				reader.onload = () => resolve(reader.result as string);
+			});
+		}
+		const image = new Image();
+		image.src = src;
+		const imgWindow = window.open(src);
+		imgWindow?.document.write(image.outerHTML);
+	};
+
 	return (
 		<>
 			<Breadcrumb>
@@ -58,12 +97,32 @@ const AddPro: React.FC = () => {
 				<Row gutter={16}>
 					<Col span={10}>
 						<Form.Item
-							name="img"
+							name="image"
 							labelCol={{ span: 24 }}
 							label="Hình ảnh sản phẩm"
-							rules={[{ required: true, message: 'Hình ảnh sản phẩm không để trống!' }]}
 						>
-							<UploadImage />
+							<UploadWrapper>
+								<div style={{ textAlign: 'center', border: '0' }}>
+									<Dragger
+										listType="picture"
+										multiple={false}
+										maxCount={1}
+										beforeUpload={() => {
+											return false;
+										}}
+										accept="image/png, image/jpg, image/jpeg, image/gif"
+										onChange={handleChangeImage}
+										onPreview={onPreview}
+										fileList={fileList}
+										style={{ border: '0' }}
+									>
+										<p className="ant-upload-drag-icon">
+											<PlusSquareOutlined style={{ fontSize: '50px' }} />
+										</p>
+										<p>Thêm ảnh!</p>
+									</Dragger>
+								</div>
+							</UploadWrapper>
 						</Form.Item>
 						<Form.Item
 							name="desc_img"
@@ -88,7 +147,7 @@ const AddPro: React.FC = () => {
 						<Row gutter={16}>
 							<Col span={12}>
 								<Form.Item
-									name="originalPrice"
+									name="price"
 									label="Giá gốc"
 									labelCol={{ span: 24 }}
 									rules={[{ required: true, message: 'Gíá sản phẩm không để trống!' }]}
@@ -98,7 +157,7 @@ const AddPro: React.FC = () => {
 							</Col>
 							<Col span={12}>
 								<Form.Item
-									name="saleOffPrice"
+									name="sale_price"
 									label="Giá khuyến mại"
 									dependencies={['originalPrice']}
 									labelCol={{ span: 24 }}
@@ -122,10 +181,11 @@ const AddPro: React.FC = () => {
 								<Form.Item
 									label="Danh mục"
 									name="categories"
+
 									labelCol={{ span: 24 }}
-									rules={[{ required: true }]}
+									rules={[{ required: true, message: 'Danh mục sản phẩm không để trống!' }]}
 								>
-									<Select style={{ width: '100%' }} size="large">
+									<Select style={{ width: '100%' }} size="large" placeholder="Lựa chọn" allowClear showSearch optionFilterProp="children">
 										{cate.map((item, index) => <Select.Option value={item.id} key={index + 1}>{item.name}</Select.Option>)}
 									</Select>
 								</Form.Item>
@@ -182,10 +242,10 @@ const Label = styled.div`
 const UploadWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
+	background-color: #fafafa;
     justify-content: center;
     min-height: 300px;
-    border: 1px dashed gray;
+    border: 1px solid gray;
     margin-bottom: 10px;
 `
 

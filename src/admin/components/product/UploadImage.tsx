@@ -1,50 +1,70 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Typography, Button, Input } from 'antd'
-import { PlusCircleOutlined, PlusSquareOutlined } from '@ant-design/icons';
+import { Typography, Button, Input, Upload, message } from 'antd'
+import { LoadingOutlined, PlusCircleOutlined, PlusOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import { upload } from "../../../api/images";
-import Upload from "antd/lib/upload/Upload";
+import type { UploadChangeParam } from "antd/es/upload";
+import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
 
-const { TextArea } = Input
+const getBase64 = (img: RcFile, callback: (url: string) => void) => {
+    const reader = new FileReader();
+    reader.addEventListener("load", () => callback(reader.result as string));
+    reader.readAsDataURL(img);
+};
 
-const UploadImage = () => {
-    const [base64Image, setBase64Image] = React.useState('')
-    const [uploadedImage, setUploadedImage] = React.useState('')
-
-    const handleChangeImage = (event: any) => {
-        const file = event.target.files[0]
-        // previewFile(file)
-        const reader = new FileReader()
-        reader.readAsDataURL(file)
-        reader.onloadend = () => {
-            uploadImage(reader.result)
-        }
+const beforeUpload = (file: RcFile) => {
+    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+    if (!isJpgOrPng) {
+        message.error("You can only upload JPG/PNG file!");
     }
-
-    const uploadImage = async (base64Image: string) => {
-        try {
-            const res = await upload(base64Image)
-            const data = res.data
-            console.log(data)
-            setUploadedImage(data.url)
-        } catch (err) {
-            console.log(err)
-        }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+        message.error("Image must smaller than 2MB!");
     }
+    return false;
+};
+const UploadImage: React.FC = () => {
+    const [image, setImage] = useState<any>();
+    const [loading, setLoading] = useState(false);
+
+    const handleChangeImage: UploadProps["onChange"] = (
+        info: UploadChangeParam<UploadFile>
+    ) => {
+        setImage(info.file.originFileObj)
+    };
+
+    const onPreview = async (file: UploadFile) => {
+        let src = file.url as string;
+        if (!src) {
+            src = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file.originFileObj as RcFile);
+                reader.onload = () => resolve(reader.result as string);
+            });
+        }
+        const image = new Image();
+        image.src = src;
+        const imgWindow = window.open(src);
+        imgWindow?.document.write(image.outerHTML);
+    };
     return (
         <Container>
             <UploadWrapper>
-                <Upload
-                   
-                    accept="image/png, image/jpg, image/jpeg, image/gif"
-                    name="image" onChange={handleChangeImage}
-                >
-                    <PlusSquareOutlined style={{ fontSize: '40px' }} />
-                </Upload>
+                <div style={{ textAlign: 'center' }}>
+                    <Upload
+                        name="image"
+                        listType="picture-card"
+                        beforeUpload={beforeUpload}
+                        accept="image/png, image/jpg, image/jpeg, image/gif"
+                        onChange={handleChangeImage}
+                        onPreview={onPreview}
+                    >
+                        <PlusSquareOutlined style={{ fontSize: '40px' }} />
 
-                {uploadedImage && (
-                    <ImagePreview style={{}} src={uploadedImage} alt="Image" />
-                )}
+                    </Upload>
+                </div>
+
+
             </UploadWrapper>
         </Container>
     )

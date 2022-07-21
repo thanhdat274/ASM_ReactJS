@@ -4,17 +4,21 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "json-server-auth --watch db.json --port 3001",
+    "db": "json-server-auth --watch db.json --port 3001",
+    "start": "concurrently --kill-others \"npm run dev\" \"npm run db\"",
     "dev": "vite",
+    "open-browser": "start http://127.0.0.1:5173",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@types/styled-components": "^5.1.25",
     "@ant-design/icons": "^4.7.0",
+    "@types/styled-components": "^5.1.25",
     "antd": "^4.21.6",
     "axios": "^0.27.2",
+    "concurrently": "^7.3.0",
     "navigo": "^8.11.1",
+    "open-browser": "^3.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.33.1",
