@@ -1,8 +1,9 @@
 import { Button, Col, Form, Input, message, Row, Typography } from 'antd';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { addCate, listOneCate } from '../../../api/category';
+import { addCate, listOneCate, update } from '../../../api/category';
+import { CateType } from '../../../type/category';
 
 interface DataType {
   id: string,
@@ -12,13 +13,31 @@ interface DataType {
 const EditCate: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate()
-  const [form] = Form.useForm<DataType>();
+  const [form] = Form.useForm();
+	const [cate, setCate] = useState([])
+  
+	useEffect(() => {
+		const getCate = async (id: string) => {
+			const { data } = await listOneCate(id);
+			console.log(id);
+			console.log(data);
+			form.setFieldsValue(data);
+		};
+
+		getCate(id as string);
+	}, []);
   const onFinish = async (values: any) => {
     console.log('Success:', values);
+    const valueEdit = {
+			id: id,
+			name: values.name,
+		};
     try {
-      const data = await addCate(values)
+      const data = await update(valueEdit)
       message.success("Cập nhật thành công")
       navigate('/admin/categories')
+      console.log(data);
+      
     } catch (err) {
       message.error("Có lỗi xảy ra")
     }
@@ -37,7 +56,8 @@ const EditCate: React.FC = () => {
       <Row gutter={16}>
         <Col span={16}>
           <Form
-            initialValues={{}}
+          form={form}
+            initialValues={cate}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="on"
