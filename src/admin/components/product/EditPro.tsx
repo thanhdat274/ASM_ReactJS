@@ -235,7 +235,7 @@ const EditPro: React.FC = () => {
 
 						<Form.Item>
 							<Link to='/admin/products'><Button type="primary" htmlType="submit" style={{ marginRight: '20px' }}>Back</Button></Link>
-							<Button type="primary" htmlType="submit">Thêm mới</Button>
+							<Button type="primary" htmlType="submit">Cập nhật</Button>
 						</Form.Item>
 					</Col>
 				</Row>

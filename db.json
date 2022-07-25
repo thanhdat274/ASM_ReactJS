@@ -2,7 +2,7 @@
   "categories": [
     {
       "id": 1,
-      "name": "Laptop 88"
+      "name": "Laptop 88 update"
     },
     {
       "name": "Diện thoại",
@@ -16,7 +16,7 @@
   "products": [
     {
       "id": 1,
-      "image": "http://res.cloudinary.com/dvj4wwihv/image/upload/v1658421682/cnsqlfzr9ap1epe8locf.png",
+      "image": "C:\\fakepath\\z3289083274919_de70d2771350c8258f128e1924253734.jpg",
       "name": "Nguyễn Thành Đạt",
       "price": 1111111,
       "sale_price": 11111,
@@ -25,6 +25,18 @@
       "desc": "1111111gggggđ",
       "short_desc": "1111111ggg",
       "cateId": 1
+    },
+    {
+      "image": "http://res.cloudinary.com/dvj4wwihv/image/upload/v1658450844/wzmpg9hpho2szgd6ixoh.png",
+      "name": "Iphone 11",
+      "price": 111,
+      "sale_price": 111,
+      "quantity": 11111,
+      "desc_img": "111111",
+      "desc": "1111111111111",
+      "short_desc": "111111",
+      "cateId": 2,
+      "id": 2
     }
   ]
 }
