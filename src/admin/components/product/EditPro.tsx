@@ -37,19 +37,21 @@ const EditPro: React.FC = () => {
 	useEffect(() => {
 		const getPro = async (id: string) => {
 			const { data } = await listOnePro(id);
+			data.image.fileList
 			console.log(id);
 			console.log(data);
 			form.setFieldsValue(data);
 		};
-
 		getPro(id as string);
 	}, []);
 
 	const onFinish = async (values: any) => {
 		console.log('Success:', values);
 		const file = fileList[0];
+		console.log(file);
+		
 		if (file) {
-			values.img = await upload(file);
+			values.image = await upload(file);
 		}
 		const valueEdit = {
 			id: id,

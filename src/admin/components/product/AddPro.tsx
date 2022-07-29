@@ -45,7 +45,9 @@ const AddPro: React.FC = () => {
 			cateId: values.cateId
 		};
 		try {
-			const data = await addPro(valueAdd)
+			const data = await addPro(valueAdd);
+			console.log('data',data);
+			
 			message.success("Thêm mới thành công")
 			navigate('/admin/products')
 			console.log(data);

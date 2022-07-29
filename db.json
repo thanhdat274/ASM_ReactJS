@@ -16,8 +16,8 @@
   "products": [
     {
       "id": 1,
-      "image": "C:\\fakepath\\z3289083274919_de70d2771350c8258f128e1924253734.jpg",
-      "name": "Nguyễn Thành Đạt",
+      "image": "http://res.cloudinary.com/dvj4wwihv/image/upload/v1659056020/qpvfceycfxxz4ydttndb.jpg",
+      "name": "Nguyễn Thành Đạt update",
       "price": 1111111,
       "sale_price": 11111,
       "quantity": 1111,
@@ -27,16 +27,76 @@
       "cateId": 1
     },
     {
-      "image": "http://res.cloudinary.com/dvj4wwihv/image/upload/v1658450844/wzmpg9hpho2szgd6ixoh.png",
-      "name": "Iphone 11",
+      "id": 2,
+      "image": "C:\\fakepath\\Screenshot 2022-07-28 164257.png",
+      "name": "Iphone 11 update",
       "price": 111,
       "sale_price": 111,
       "quantity": 11111,
       "desc_img": "111111",
       "desc": "1111111111111",
       "short_desc": "111111",
+      "cateId": 2
+    },
+    {
+      "id": 3,
+      "image": "C:\\fakepath\\Screenshot 2022-07-28 164257.png",
+      "name": "aaaaaaaaaaaaaa update",
+      "price": 111111111112,
+      "sale_price": 1.1111,
+      "quantity": 1111111,
+      "desc_img": "111111111111111111",
+      "desc": "1111111111111111111111111",
+      "short_desc": "111111111",
+      "cateId": 2
+    },
+    {
+      "id": 4,
+      "image": "http://res.cloudinary.com/dvj4wwihv/image/upload/v1659056000/hrobczamoi1k9pcrciaq.png",
+      "name": "111111 update",
+      "price": 111,
+      "sale_price": 11111,
+      "quantity": 111111,
+      "desc_img": "111111111111",
+      "desc": "11111111111",
+      "short_desc": "111111",
+      "cateId": 2
+    },
+    {
+      "image": "http://res.cloudinary.com/dvj4wwihv/image/upload/v1659055532/kvrxzibig31j3o5voapy.png",
+      "name": "111111",
+      "price": 111,
+      "sale_price": 11,
+      "quantity": 111111,
+      "desc_img": "111111111111",
+      "desc": "11111111111",
+      "short_desc": "111111",
       "cateId": 2,
-      "id": 2
+      "id": 5
+    },
+    {
+      "image": "http://res.cloudinary.com/dvj4wwihv/image/upload/v1659055556/ozusdvwqc8jtycrt9u5f.jpg",
+      "name": "111111",
+      "price": 111,
+      "sale_price": 11,
+      "quantity": 111111,
+      "desc_img": "111111111111",
+      "desc": "11111111111",
+      "short_desc": "111111",
+      "cateId": 2,
+      "id": 6
+    },
+    {
+      "image": "http://res.cloudinary.com/dvj4wwihv/image/upload/v1659055620/ill3afscp9ugojpoihxk.jpg",
+      "name": "111111",
+      "price": 111,
+      "sale_price": 11,
+      "quantity": 111111,
+      "desc_img": "111111111111",
+      "desc": "11111111111",
+      "short_desc": "111111",
+      "cateId": 2,
+      "id": 7
     }
   ]
 }
