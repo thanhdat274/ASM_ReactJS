@@ -4,7 +4,7 @@ import AdminLayout from './admin/AdminLayout';
 import AddCate from './admin/components/cate/AddCate';
 import ListCate from './admin/components/cate/ListCate';
 import Dashboard from './admin/Dashboard';
-import './App.css'
+import './index.css'
 import Signin from './client/components/auth/signin';
 import Home from './client/components/Home';
 import UserLayout from './client/UserLayout';
