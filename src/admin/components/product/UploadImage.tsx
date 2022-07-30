@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { Typography, Button, Input, Upload, message } from 'antd'
 import { LoadingOutlined, PlusCircleOutlined, PlusOutlined, PlusSquareOutlined } from '@ant-design/icons';
-import { upload } from "../../../api/images";
 import type { UploadChangeParam } from "antd/es/upload";
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
+import styled from 'styled-components';
 
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
     const reader = new FileReader();

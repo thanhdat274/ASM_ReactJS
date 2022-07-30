@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import { Typography, Col, Row, Button, Checkbox, Form, Input, InputNumber, Select, message, UploadFile } from 'antd';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { editPro, listOnePro } from "../../../api/products";
 import { PlusCircleOutlined, PlusSquareOutlined } from "@ant-design/icons";
 import Dragger from "antd/lib/upload/Dragger";
-import { upload } from "../../../api/images";
-import { listCate } from "../../../api/category";
-import { CateType } from "../../../type/category";
-import { ProductType } from "../../../type/Product";
 import { UploadProps } from "antd/es/upload";
 import { RcFile } from "antd/lib/upload";
+import { CateType } from "../../../type/category";
+import { listCate } from "../../../api/category";
+import { upload } from "../../../api/images";
+import { editPro, listOnePro } from "../../../api/products";
+import styled from 'styled-components';
 
 const { TextArea } = Input
 const { Option } = Select;
@@ -37,7 +36,6 @@ const EditPro: React.FC = () => {
 	useEffect(() => {
 		const getPro = async (id: string) => {
 			const { data } = await listOnePro(id);
-			data.image.fileList
 			console.log(id);
 			console.log(data);
 			form.setFieldsValue(data);
@@ -49,7 +47,7 @@ const EditPro: React.FC = () => {
 		console.log('Success:', values);
 		const file = fileList[0];
 		console.log(file);
-		
+
 		if (file) {
 			values.image = await upload(file);
 		}

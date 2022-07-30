@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import { Typography, Col, Row, Button, Form, Input, InputNumber, Select, message, UploadFile } from 'antd'
 import { Link, useNavigate } from "react-router-dom";
-import { addPro } from "../../../api/products";
 import { PlusSquareOutlined } from "@ant-design/icons";
-import { listCate } from "../../../api/category";
-import { upload } from "../../../api/images";
 import { UploadProps } from "antd/es/upload";
 import { RcFile } from "antd/lib/upload";
 import Dragger from "antd/es/upload/Dragger";
 import { CateType } from "../../../type/category";
+import { upload } from "../../../api/images";
+import { listCate } from "../../../api/category";
+import { addPro } from "../../../api/products";
+import styled from 'styled-components';
 
 const { TextArea } = Input
 const { Option } = Select;
@@ -46,8 +46,8 @@ const AddPro: React.FC = () => {
 		};
 		try {
 			const data = await addPro(valueAdd);
-			console.log('data',data);
-			
+			console.log('data', data);
+
 			message.success("Thêm mới thành công")
 			navigate('/admin/products')
 			console.log(data);

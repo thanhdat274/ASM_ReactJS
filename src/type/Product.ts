@@ -4,7 +4,7 @@ export type ProductType = {
     price: number,
     sale_price: number,
     quantity: number,
-    image:string,
+    image: string,
     desc_img: string,
     desc: string,
     short_desc: string,

@@ -2,8 +2,8 @@ import { SearchOutlined } from '@ant-design/icons';
 import { Input, Layout } from 'antd';
 import React from 'react';
 
-import styled from 'styled-components';
 import LogoImage from '../assets/images/logo.png'
+import styled from 'styled-components';
 
 const { Header } = Layout;
 
@@ -15,7 +15,7 @@ const HeaderAdmin: React.FC = () => (
             size="large"
             placeholder="Enter keyword.."
             prefix={<SearchOutlined />}
-          />
+        />
     </HeaderCustom>
 );
 

@@ -4,9 +4,10 @@ import { ColumnsType } from 'antd/es/table';
 import React, { useEffect, useState } from 'react'
 import { BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs'
 import { Link, NavLink } from 'react-router-dom'
-import styled from 'styled-components'
-import { listCate, remove } from '../../../api/category'
 import { CateType } from '../../../type/category';
+import { listCate } from '../../../api/category';
+import { remove } from '../../../api/products';
+import styled from 'styled-components';
 
 
 const ListCate = () => {

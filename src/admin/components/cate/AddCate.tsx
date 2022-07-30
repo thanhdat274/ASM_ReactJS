@@ -1,8 +1,8 @@
 import { Button, Col, Form, Input, message, Row, Typography } from 'antd';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import { addCate } from '../../../api/category';
+import styled from 'styled-components';
 
 const AddCate: React.FC = () => {
     const navigate = useNavigate()

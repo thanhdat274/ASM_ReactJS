@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import { Typography, Button, Table, Space, Image, Modal, message } from 'antd';
 import { Link } from 'react-router-dom'
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
-import { getAll, remove } from "../../../api/products";
-import { ProductType } from '../../../type/Product';
+
+import { ProductType } from "../../../type/Product";
+import { getAll, remove } from '../../../api/products';
+import styled from 'styled-components';
 
 const ListPro = () => {
   const [dataTable, setDataTable] = useState<ProductType[]>([]);
@@ -48,10 +49,10 @@ const ListPro = () => {
     {
       title: 'Action',
       key: 'action',
-      render: (record: ProductType) => ( 
+      render: (record: ProductType) => (
         <Space size="middle">
           <Link to={`${record.id}/edit`}><button style={{ border: '0px', fontSize: '20px' }} onClick={() => console.log(`${record.id}`)} > <EditOutlined /></button></Link>
-          <button style={{ border: '0px', fontSize: '20px' }} ><DeleteOutlined style={{ color: "red" }} onClick={() => {onDelete(record.id as string)}}/></button>
+          <button style={{ border: '0px', fontSize: '20px' }} ><DeleteOutlined style={{ color: "red" }} onClick={() => { onDelete(record.id as string) }} /></button>
         </Space>
       ),
     },
@@ -63,7 +64,7 @@ const ListPro = () => {
         const data = await getAll()
         setDataTable(data.data)
         console.log(data.data);
-        
+
       } catch (err) {
         console.log(err);
       }

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const upload = async (file: any) => {
-    const CLOUNDINARY_URL ="https://api.cloudinary.com/v1_1/dvj4wwihv/image/upload";
+    const CLOUNDINARY_URL = "https://api.cloudinary.com/v1_1/dvj4wwihv/image/upload";
     const CLOUNDINARY_PRESET = "js8yqruv";
     console.log(file);
 

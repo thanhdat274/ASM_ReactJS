@@ -1,9 +1,8 @@
 import { Button, Col, Form, Input, message, Row, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { listOneCate, update } from '../../../api/category';
 import styled from 'styled-components';
-import { addCate, listOneCate, update } from '../../../api/category';
-import { CateType } from '../../../type/category';
 
 interface DataType {
   id: string,

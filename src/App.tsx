@@ -21,7 +21,6 @@ function App() {
   return (
     <>
       <Routes>
-
         {/* phần user*/}
         <Route path="/" element={<UserLayout />}>
           <Route index element={<Home />} />
