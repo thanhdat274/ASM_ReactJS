@@ -23,7 +23,7 @@
     display: block;
     top: 0;
     left: 0;
-  position: fixed;
+    position: fixed;
 }
 
 .header-container {
@@ -287,10 +287,6 @@
 /* --------------------------------- */
 
 /* phần content */
-section {
-    margin-top: 20px;
-}
-
 .box-content {
     max-width: 1200px;
     height: auto;
@@ -314,7 +310,7 @@ section {
     line-height: 30px;
 }
 
-.title{
+.title {
     @apply text-[24px] text-black no-underline font-bold uppercase hover:text-black
 }
 
@@ -391,7 +387,10 @@ section {
     border-radius: 10px;
     box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.08), 0px 3px 4px rgba(0, 0, 0, 0.1), 0px 1px 4px -1px rgba(0, 0, 0, 0.1);
 }
-.product Link, .product p, .evaluate {
+
+.product Link,
+.product p,
+.evaluate {
     color: black;
 }
 
@@ -403,6 +402,7 @@ section {
 }
 
 .product-img img {
+    width: 160px;
     height: 160px;
     margin-top: 10px;
     text-align: center;
@@ -439,7 +439,7 @@ section {
     border-radius: 2px;
 }
 
-.promotion p{
+.promotion p {
     padding: 10px;
     font-size: 13px;
     margin-bottom: 0;
@@ -645,7 +645,7 @@ section {
 }
 
 .link {
-    margin: 10px 0;
+    margin-bottom: 5px;
 }
 
 .box-one__pay {

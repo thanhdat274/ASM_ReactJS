@@ -3,22 +3,22 @@ import instance from "./instance";
 
 
 export const listCate = () => {
-    const url = '/categories'
+    const url = '/category'
     return instance.get(url);
 }
 export const listOneCate = (id: string) => {
-    const url = `/categories/${id}`
+    const url = `/category/${id}`
     return instance.get(url);
 }
 export const remove = (id: string) => {
-    const url = `/categories/${id}`
+    const url = `/category/${id}`
     return instance.delete(url)
 }
 export const addCate = (data: CateType) => {
-    const url = '/categories'
+    const url = '/category'
     return instance.post(url, data);
 }
 export const update = (data: CateType) => {
-    const url = `/categories/${data.id}`
+    const url = `/category/${data._id}`
     return instance.put(url, data);
 }

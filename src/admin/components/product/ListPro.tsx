@@ -51,8 +51,8 @@ const ListPro = () => {
       key: 'action',
       render: (record: ProductType) => (
         <Space size="middle">
-          <Link to={`${record.id}/edit`}><button style={{ border: '0px', fontSize: '20px' }} onClick={() => console.log(`${record.id}`)} > <EditOutlined /></button></Link>
-          <button style={{ border: '0px', fontSize: '20px' }} ><DeleteOutlined style={{ color: "red" }} onClick={() => { onDelete(record.id as string) }} /></button>
+          <Link to={`${record._id}/edit`}><button style={{ border: '0px', fontSize: '20px' }} onClick={() => console.log(`${record._id}`)} > <EditOutlined /></button></Link>
+          <button style={{ border: '0px', fontSize: '20px' }} ><DeleteOutlined style={{ color: "red" }} onClick={() => { onDelete(record._id as string) }} /></button>
         </Space>
       ),
     },
@@ -80,7 +80,7 @@ const ListPro = () => {
       onOk: async () => {
         const { data } = await remove(id);
         if (data) {
-          setDataTable(dataTable.filter(item => item.id !== id));
+          setDataTable(dataTable.filter(item => item._id !== id));
         }
         message.success("Xóa thành công")
       },

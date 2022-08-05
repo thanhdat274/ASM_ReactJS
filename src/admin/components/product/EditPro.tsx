@@ -174,12 +174,12 @@ const EditPro: React.FC = () => {
 								<Form.Item
 									name="sale_price"
 									label="Giá khuyến mại"
-									dependencies={['originalPrice']}
+									dependencies={['price']}
 									labelCol={{ span: 24 }}
 									rules={[{ required: true, message: 'Giá khuyến mại sản phẩm không để trống!' },
 									({ getFieldValue }) => ({
 										validator(_, value) {
-											if (!value || getFieldValue('originalPrice') <= value) {
+											if (!value || getFieldValue('price') <= value) {
 												return Promise.reject(new Error('Giá khuyến mại phải nhỏ hơn giá gốc!'));
 											} else {
 												return Promise.resolve();
@@ -200,7 +200,7 @@ const EditPro: React.FC = () => {
 									rules={[{ required: true, message: 'Danh mục sản phẩm không để trống!' }]}
 								>
 									<Select style={{ width: '100%' }} size="large" placeholder="Lựa chọn" allowClear showSearch optionFilterProp="children">
-										{cate.map((item, index) => <Select.Option value={item.id} key={index + 1}>{item.name}</Select.Option>)}
+										{cate.map((item, index) => <Select.Option value={item._id} key={index + 1}>{item.name}</Select.Option>)}
 									</Select>
 								</Form.Item>
 							</Col>

@@ -1,4 +1,4 @@
 export type CateType = {
-    id?: string,
+    _id?: string,
     name: string,
 }

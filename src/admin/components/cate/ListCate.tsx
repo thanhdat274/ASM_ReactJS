@@ -2,11 +2,9 @@ import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button, message, Modal, Space, Table, Typography } from 'antd'
 import { ColumnsType } from 'antd/es/table';
 import React, { useEffect, useState } from 'react'
-import { BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { CateType } from '../../../type/category';
-import { listCate } from '../../../api/category';
-import { remove } from '../../../api/products';
+import { listCate, remove } from '../../../api/category';
 import styled from 'styled-components';
 
 
@@ -28,8 +26,8 @@ const ListCate = () => {
       key: 'action',
       render: (record: CateType) => (
         <Space size="middle">
-          <Link to={`${record.id}/edit`}><button style={{ border: '0px', fontSize: '20px' }} onClick={() => console.log(`${record.id}`)} > <EditOutlined /></button></Link>
-          <button style={{ border: '0px', fontSize: '20px' }} ><DeleteOutlined style={{ color: "red" }} onClick={() => { onDelete(record.id as string) }} /></button>
+          <Link to={`${record._id}/edit`}><button style={{ border: '0px', fontSize: '20px' }} onClick={() => console.log(`${record._id}`)} > <EditOutlined /></button></Link>
+          <button style={{ border: '0px', fontSize: '20px' }} ><DeleteOutlined style={{ color: "red" }} onClick={() => { onDelete(record._id as string) }} /></button>
         </Space>
       ),
     },
@@ -53,7 +51,7 @@ const ListCate = () => {
       onOk: async () => {
         const { data } = await remove(id);
         if (data) {
-          setCate(cate.filter(item => item.id !== id));
+          setCate(cate.filter(item => item._id !== id));
         }
         message.success("Xóa thành công")
       },

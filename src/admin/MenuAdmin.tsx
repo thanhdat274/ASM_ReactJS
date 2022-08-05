@@ -13,6 +13,11 @@ const MenuAdmin: React.FC = () => (
         style={{ height: '100%', borderRight: 0 }}
 
     >
+        <Menu.Item key="sub" icon={<AppstoreOutlined />} title="client">
+            <NavLink className="nav-link active" aria-current="page" to="/">
+                Quay lại trang chủ
+            </NavLink>
+        </Menu.Item>
         <Menu.Item key="sub1" icon={<AppstoreOutlined />} title="Dashboard">
             <NavLink className="nav-link active" aria-current="page" to="/admin">
                 Dashboard

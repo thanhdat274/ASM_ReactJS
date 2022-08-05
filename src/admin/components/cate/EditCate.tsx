@@ -4,10 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { listOneCate, update } from '../../../api/category';
 import styled from 'styled-components';
 
-interface DataType {
-  id: string,
-  name: string
-}
 
 const EditCate: React.FC = () => {
   const { id } = useParams();
