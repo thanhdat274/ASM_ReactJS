@@ -1,17 +1,16 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
-import Footer from "./Footer";
-import Header from "./Header";
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import Footer from './Footer';
+import Header from './Header';
 
 const UserLayout = () => {
   return (
-    <div id="wrapper" style={{ overflow: "auto" }}>
+    <div id="wrapper" style={{ overflow: 'auto' }}>
       <header>
         <Header />
       </header>
       <section className="container">
-
-      <Outlet />
+        <Outlet />
       </section>
       <footer>
         <Footer />

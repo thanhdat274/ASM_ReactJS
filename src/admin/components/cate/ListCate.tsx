@@ -1,15 +1,14 @@
-import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons'
-import { Button, message, Modal, Space, Table, Typography } from 'antd'
+import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import { Button, message, Modal, Space, Table, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { CateType } from '../../../type/category';
 import { listCate, remove } from '../../../api/category';
 import styled from 'styled-components';
 
-
 const ListCate = () => {
-  const [cate, setCate] = useState<CateType[]>([])
+  const [cate, setCate] = useState<CateType[]>([]);
   const columns: ColumnsType<CateType> = [
     {
       title: 'ID',
@@ -26,8 +25,20 @@ const ListCate = () => {
       key: 'action',
       render: (record: CateType) => (
         <Space size="middle">
-          <Link to={`${record._id}/edit`}><button style={{ border: '0px', fontSize: '20px' }} onClick={() => console.log(`${record._id}`)} > <EditOutlined /></button></Link>
-          <button style={{ border: '0px', fontSize: '20px' }} ><DeleteOutlined style={{ color: "red" }} onClick={() => { onDelete(record._id as string) }} /></button>
+          <Link to={`${record._id}/edit`}>
+            <button style={{ border: '0px', fontSize: '20px' }} onClick={() => console.log(`${record._id}`)}>
+              {' '}
+              <EditOutlined />
+            </button>
+          </Link>
+          <button style={{ border: '0px', fontSize: '20px' }}>
+            <DeleteOutlined
+              style={{ color: 'red' }}
+              onClick={() => {
+                onDelete(record._id as string);
+              }}
+            />
+          </button>
         </Space>
       ),
     },
@@ -35,25 +46,25 @@ const ListCate = () => {
   useEffect(() => {
     const getCate = async () => {
       try {
-        const data = await listCate()
-        setCate(data.data)
+        const data = await listCate();
+        setCate(data.data);
       } catch (error) {
         console.log(error);
       }
-    }
-    getCate()
-  }, [])
+    };
+    getCate();
+  }, []);
   const onDelete = async (id: string) => {
     console.log(id);
 
     Modal.confirm({
-      title: "Bạn có muốn xóa không?",
+      title: 'Bạn có muốn xóa không?',
       onOk: async () => {
         const { data } = await remove(id);
         if (data) {
-          setCate(cate.filter(item => item._id !== id));
+          setCate(cate.filter((item) => item._id !== id));
         }
-        message.success("Xóa thành công")
+        message.success('Xóa thành công');
       },
     });
     console.log();
@@ -70,13 +81,13 @@ const ListCate = () => {
       </Breadcrumb>
       <Table columns={columns} dataSource={cate} />
     </>
-  )
-}
+  );
+};
 const Breadcrumb = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    text-transform: uppercase;
-`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  text-transform: uppercase;
+`;
 
-export default ListCate
+export default ListCate;

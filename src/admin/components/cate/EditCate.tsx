@@ -4,12 +4,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { listOneCate, update } from '../../../api/category';
 import styled from 'styled-components';
 
-
 const EditCate: React.FC = () => {
   const { id } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [form] = Form.useForm();
-  const [cate, setCate] = useState([])
+  const [cate, setCate] = useState([]);
 
   useEffect(() => {
     const getCate = async (id: string) => {
@@ -29,13 +28,12 @@ const EditCate: React.FC = () => {
     };
     console.log(valueEdit);
     try {
-      const data = await update(valueEdit)
-      message.success("Cập nhật thành công")
-      navigate('/admin/categories')
+      const data = await update(valueEdit);
+      message.success('Cập nhật thành công');
+      navigate('/admin/categories');
       console.log(data);
-
     } catch (err) {
-      message.error("Có lỗi xảy ra")
+      message.error('Có lỗi xảy ra');
     }
   };
   const onFinishFailed = (errorInfo: any) => {
@@ -81,12 +79,12 @@ const EditCate: React.FC = () => {
 };
 
 const Breadcrumb = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
-    text-transform: uppercase;
-`
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  text-transform: uppercase;
+`;
 const Label = styled.div`
-	font-size: 13px;
-`
+  font-size: 13px;
+`;
 export default EditCate;

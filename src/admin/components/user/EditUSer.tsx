@@ -1,35 +1,33 @@
-import { Typography, Col, Row, Button, Form, Input, InputNumber, Select, message, UploadFile } from 'antd'
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { PlusSquareOutlined } from "@ant-design/icons";
-import { UploadProps } from "antd/es/upload";
-import Dragger from "antd/es/upload/Dragger";
-import { RcFile } from "antd/lib/upload";
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { upload } from "../../../api/images";
+import { Typography, Col, Row, Button, Form, Input, InputNumber, Select, message, UploadFile } from 'antd';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { PlusSquareOutlined } from '@ant-design/icons';
+import { UploadProps } from 'antd/es/upload';
+import Dragger from 'antd/es/upload/Dragger';
+import { RcFile } from 'antd/lib/upload';
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { upload } from '../../../api/images';
 import { updateUser, listOneUser } from '../../../api/user';
-
 
 const EditUser: React.FC = () => {
   const navigate = useNavigate();
-  const { id } = useParams()
+  const { id } = useParams();
   const [fileList, setfileList] = useState<UploadFile[] | any>([]);
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([]);
   const [form] = Form.useForm();
 
   useEffect(() => {
     const getUser = async (id: string) => {
-
-      const { data } = await listOneUser(id)
+      const { data } = await listOneUser(id);
       console.log(id);
       console.log(data);
       form.setFieldsValue(data);
-    }
+    };
     getUser(id as string);
-  },[])
+  }, []);
 
   const onFinish = async (values: any) => {
-    console.log("Success:", values);
+    console.log('Success:', values);
     const file = fileList[0];
     console.log(file);
 
@@ -44,27 +42,27 @@ const EditUser: React.FC = () => {
       password: values.password,
       phone: values.phone,
       address: values.address,
-      role: values.role
+      role: values.role,
     };
     console.log(valueEdit);
     try {
       const data = await updateUser(valueEdit);
-      console.log("data", data);
-      message.success("Cập nhật thành công");
-      navigate("/admin/user");
+      console.log('data', data);
+      message.success('Cập nhật thành công');
+      navigate('/admin/user');
       console.log(data);
     } catch (err) {
       console.log(err);
-      message.error("Có lỗi xảy ra");
+      message.error('Có lỗi xảy ra');
     }
   };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
+    console.log('Failed:', errorInfo);
   };
-  const handleChangeImage: UploadProps["onChange"] = ({ fileList: newFileList }) => {
-		setfileList(newFileList);
-	};
+  const handleChangeImage: UploadProps['onChange'] = ({ fileList: newFileList }) => {
+    setfileList(newFileList);
+  };
   const onPreview = async (file: UploadFile) => {
     let src = file.url as string;
     if (!src) {
@@ -80,29 +78,19 @@ const EditUser: React.FC = () => {
     imgWindow?.document.write(image.outerHTML);
   };
   return (
-    <div >
+    <div>
       <Breadcrumb>
         <Typography.Title level={2} style={{ margin: 0 }}>
           Cập nhật tài khoản
         </Typography.Title>
       </Breadcrumb>
 
-      <Form
-        form={form}
-        initialValues={users}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="on"
-      >
+      <Form form={form} initialValues={users} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="on">
         <Row gutter={16}>
           <Col span={10}>
-            <Form.Item
-              name="image"
-              labelCol={{ span: 24 }}
-              label="Hình ảnh đại diện"
-            >
+            <Form.Item name="image" labelCol={{ span: 24 }} label="Hình ảnh đại diện">
               <UploadWrapper>
-                <div style={{ textAlign: "center", border: "0" }}>
+                <div style={{ textAlign: 'center', border: '0' }}>
                   <Dragger
                     listType="picture"
                     multiple={false}
@@ -114,10 +102,10 @@ const EditUser: React.FC = () => {
                     onChange={handleChangeImage}
                     onPreview={onPreview}
                     fileList={fileList}
-                    style={{ border: "0" }}
+                    style={{ border: '0' }}
                   >
                     <p className="ant-upload-drag-icon">
-                      <PlusSquareOutlined style={{ fontSize: "50px" }} />
+                      <PlusSquareOutlined style={{ fontSize: '50px' }} />
                     </p>
                     <p>Thêm ảnh!</p>
                   </Dragger>
@@ -131,9 +119,7 @@ const EditUser: React.FC = () => {
               name="name"
               labelCol={{ span: 24 }}
               label="Họ và tên"
-              rules={[
-                { required: true, message: "Họ và tên không để trống!" },
-              ]}
+              rules={[{ required: true, message: 'Họ và tên không để trống!' }]}
             >
               <Input size="large" />
             </Form.Item>
@@ -144,11 +130,9 @@ const EditUser: React.FC = () => {
                   name="email"
                   label="Địa chi email"
                   labelCol={{ span: 24 }}
-                  rules={[
-                    { required: true, message: "Email không để trống!" },
-                  ]}
+                  rules={[{ required: true, message: 'Email không để trống!' }]}
                 >
-                  <Input style={{ width: "100%" }} size="large" />
+                  <Input style={{ width: '100%' }} size="large" />
                 </Form.Item>
               </Col>
               <Col span={12}>
@@ -170,12 +154,12 @@ const EditUser: React.FC = () => {
                   rules={[
                     {
                       required: true,
-                      message: "Chức vụ không để trống!",
+                      message: 'Chức vụ không để trống!',
                     },
                   ]}
                 >
                   <Select
-                    style={{ width: "100%" }}
+                    style={{ width: '100%' }}
                     size="large"
                     placeholder="Lựa chọn"
                     allowClear
@@ -195,11 +179,11 @@ const EditUser: React.FC = () => {
                   rules={[
                     {
                       required: true,
-                      message: "Số điện thoại không để trống!",
+                      message: 'Số điện thoại không để trống!',
                     },
                   ]}
                 >
-                  <InputNumber style={{ width: "100%" }} size="large" />
+                  <InputNumber style={{ width: '100%' }} size="large" />
                 </Form.Item>
               </Col>
             </Row>
@@ -211,7 +195,7 @@ const EditUser: React.FC = () => {
               rules={[
                 {
                   required: true,
-                  message: "Địa chỉ không để trống!",
+                  message: 'Địa chỉ không để trống!',
                 },
               ]}
             >
@@ -219,11 +203,7 @@ const EditUser: React.FC = () => {
             </Form.Item>
             <Form.Item>
               <Link to="/admin/user">
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  style={{ marginRight: "20px" }}
-                >
+                <Button type="primary" htmlType="submit" style={{ marginRight: '20px' }}>
                   Back
                 </Button>
               </Link>
@@ -239,20 +219,20 @@ const EditUser: React.FC = () => {
 };
 
 const Breadcrumb = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
-	text-transform: uppercase;
-`
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  text-transform: uppercase;
+`;
 
 const UploadWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-	background-color: #fafafa;
-    justify-content: center;
-    min-height: 300px;
-    border: 1px solid gray;
-    margin-bottom: 10px;
-`
+  display: flex;
+  flex-direction: column;
+  background-color: #fafafa;
+  justify-content: center;
+  min-height: 300px;
+  border: 1px solid gray;
+  margin-bottom: 10px;
+`;
 
 export default EditUser;

@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -8,7 +8,11 @@ const Header = () => {
         <div className="navbar">
           <Link to="/" className="nav-brand">
             <div className="box-logo-desktop">
-              <img src="https://cdn.sforum.vn/sforum/wp-content/uploads/2021/08/logo_cps-1.png" alt='' className="header-img" />
+              <img
+                src="https://cdn.sforum.vn/sforum/wp-content/uploads/2021/08/logo_cps-1.png"
+                alt=""
+                className="header-img"
+              />
             </div>
           </Link>
           <div className="box-search">
@@ -71,14 +75,16 @@ const Header = () => {
             <div className="about__box-icon">
               <i className="fa-solid fa-circle-user" style={{ textAlign: 'center' }} />
               <div className="about__box-content">
-                <p className="" style={{ textAlign: 'center' }}>Smember</p>
+                <p className="" style={{ textAlign: 'center' }}>
+                  Smember
+                </p>
               </div>
             </div>
           </Link>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

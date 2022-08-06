@@ -1,7 +1,7 @@
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Image, message, Modal, Space, Table, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { deleteUser, listUser } from '../../../api/user';
@@ -19,7 +19,7 @@ const ListUser = () => {
       title: 'Tên khách hàng',
       dataIndex: 'name',
       key: 'name',
-      render: text => <p style={{ width: '200px' }}>{text}</p>,
+      render: (text) => <p style={{ width: '200px' }}>{text}</p>,
     },
     {
       title: 'Email',
@@ -38,15 +38,27 @@ const ListUser = () => {
       title: 'Chức vụ',
       dataIndex: 'role',
       key: 'role',
-      render: text => <p style={{ width: '200px' }}>{text ? 'Nhân viên' : 'Khách hàng'}</p>,
+      render: (text) => <p style={{ width: '200px' }}>{text ? 'Nhân viên' : 'Khách hàng'}</p>,
     },
     {
       title: 'Action',
       key: 'action',
       render: (record: UserType) => (
         <Space size="middle">
-          <Link to={`${record._id}/edit`}><button style={{ border: '0px', fontSize: '20px' }} onClick={() => console.log(`${record._id}`)} > <EditOutlined /></button></Link>
-          <button style={{ border: '0px', fontSize: '20px' }} ><DeleteOutlined style={{ color: "red" }} onClick={() => {onDelete(record._id as string) }} /></button>
+          <Link to={`${record._id}/edit`}>
+            <button style={{ border: '0px', fontSize: '20px' }} onClick={() => console.log(`${record._id}`)}>
+              {' '}
+              <EditOutlined />
+            </button>
+          </Link>
+          <button style={{ border: '0px', fontSize: '20px' }}>
+            <DeleteOutlined
+              style={{ color: 'red' }}
+              onClick={() => {
+                onDelete(record._id as string);
+              }}
+            />
+          </button>
         </Space>
       ),
     },
@@ -55,28 +67,27 @@ const ListUser = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await listUser()
-        setDataTable(data.data)
+        const data = await listUser();
+        setDataTable(data.data);
         console.log(data.data);
-
       } catch (err) {
         console.log(err);
       }
-    }
-    fetchData()
-  }, [])
+    };
+    fetchData();
+  }, []);
 
   const onDelete = async (id: string) => {
     console.log(id);
 
     Modal.confirm({
-      title: "Bạn có muốn xóa không?",
+      title: 'Bạn có muốn xóa không?',
       onOk: async () => {
         const { data } = await deleteUser(id);
         if (data) {
-          setDataTable(dataTable.filter(item => item._id !== id));
+          setDataTable(dataTable.filter((item) => item._id !== id));
         }
-        message.success("Xóa thành công")
+        message.success('Xóa thành công');
       },
     });
     console.log();
@@ -93,14 +104,14 @@ const ListUser = () => {
       </Breadcrumb>
       <Table columns={columns} dataSource={dataTable} />
     </>
-  )
-}
+  );
+};
 
 const Breadcrumb = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    text-transform: uppercase;
-`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  text-transform: uppercase;
+`;
 
-export default ListUser
+export default ListUser;

@@ -1,33 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { Typography, Col, Row, Button, Form, Input, InputNumber, Select, message, UploadFile } from 'antd'
-import { Link, useNavigate } from "react-router-dom";
-import { PlusSquareOutlined } from "@ant-design/icons";
-import { UploadProps } from "antd/es/upload";
-import { RcFile } from "antd/lib/upload";
-import Dragger from "antd/es/upload/Dragger";
-import { CateType } from "../../../type/category";
-import { upload } from "../../../api/images";
-import { listCate } from "../../../api/category";
-import { addPro } from "../../../api/products";
+import React, { useEffect, useState } from 'react';
+import { Typography, Col, Row, Button, Form, Input, InputNumber, Select, message, UploadFile } from 'antd';
+import { Link, useNavigate } from 'react-router-dom';
+import { PlusSquareOutlined } from '@ant-design/icons';
+import { UploadProps } from 'antd/es/upload';
+import { RcFile } from 'antd/lib/upload';
+import Dragger from 'antd/es/upload/Dragger';
+import { CateType } from '../../../type/category';
+import { upload } from '../../../api/images';
+import { listCate } from '../../../api/category';
+import { addPro } from '../../../api/products';
 import styled from 'styled-components';
 
-const { TextArea } = Input
+const { TextArea } = Input;
 
 const AddPro: React.FC = () => {
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 	const [fileList, setfileList] = useState<UploadFile[] | any>([]);
-	const [cate, setCate] = useState<CateType[]>([])
+	const [cate, setCate] = useState<CateType[]>([]);
 	useEffect(() => {
 		const getCate = async () => {
 			try {
-				const data = await listCate()
-				setCate(data.data)
+				const data = await listCate();
+				setCate(data.data);
 			} catch (error) {
 				console.log(error);
 			}
-		}
-		getCate()
-	}, [])
+		};
+		getCate();
+	}, []);
 
 	const onFinish = async (values: any) => {
 		console.log('Success:', values);
@@ -41,24 +41,23 @@ const AddPro: React.FC = () => {
 			desc_img: values.desc_img,
 			desc: values.desc,
 			short_desc: values.short_desc,
-			cateId: values.cateId
+			cateId: values.cateId,
 		};
 		try {
 			const data = await addPro(valueAdd);
 			console.log('data', data);
 
-			message.success("Thêm mới thành công")
-			navigate('/admin/products')
+			message.success('Thêm mới thành công');
+			navigate('/admin/products');
 			console.log(data);
-
 		} catch (err) {
-			message.error("Có lỗi xảy ra")
+			message.error('Có lỗi xảy ra');
 		}
 	};
 	const onFinishFailed = (errorInfo: any) => {
 		console.log('Failed:', errorInfo);
 	};
-	const handleChangeImage: UploadProps["onChange"] = ({ fileList: newFileList }) => {
+	const handleChangeImage: UploadProps['onChange'] = ({ fileList: newFileList }) => {
 		setfileList(newFileList);
 	};
 	const onPreview = async (file: UploadFile) => {
@@ -84,19 +83,10 @@ const AddPro: React.FC = () => {
 				</Typography.Title>
 			</Breadcrumb>
 
-			<Form
-				initialValues={{}}
-				onFinish={onFinish}
-				onFinishFailed={onFinishFailed}
-				autoComplete="on"
-			>
+			<Form initialValues={{}} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="on">
 				<Row gutter={16}>
 					<Col span={10}>
-						<Form.Item
-							name="image"
-							labelCol={{ span: 24 }}
-							label="Hình ảnh sản phẩm"
-						>
+						<Form.Item name="image" labelCol={{ span: 24 }} label="Hình ảnh sản phẩm">
 							<UploadWrapper>
 								<div style={{ textAlign: 'center', border: '0' }}>
 									<Dragger
@@ -157,16 +147,17 @@ const AddPro: React.FC = () => {
 									label="Giá khuyến mại"
 									dependencies={['price']}
 									labelCol={{ span: 24 }}
-									rules={[{ required: true, message: 'Giá khuyến mại sản phẩm không để trống!' },
-									({ getFieldValue }) => ({
-										validator(_, value) {
-											if (!value || getFieldValue('price') <= value) {
-												return Promise.reject(new Error('Giá khuyến mại phải nhỏ hơn giá gốc!'));
-											} else {
-												return Promise.resolve();
-											}
-										},
-									}),
+									rules={[
+										{ required: true, message: 'Giá khuyến mại sản phẩm không để trống!' },
+										({ getFieldValue }) => ({
+											validator(_, value) {
+												if (!value || getFieldValue('price') <= value) {
+													return Promise.reject(new Error('Giá khuyến mại phải nhỏ hơn giá gốc!'));
+												} else {
+													return Promise.resolve();
+												}
+											},
+										}),
 									]}
 								>
 									<InputNumber style={{ width: '100%' }} size="large" />
@@ -180,8 +171,19 @@ const AddPro: React.FC = () => {
 									labelCol={{ span: 24 }}
 									rules={[{ required: true, message: 'Danh mục sản phẩm không để trống!' }]}
 								>
-									<Select style={{ width: '100%' }} size="large" placeholder="Lựa chọn" allowClear showSearch optionFilterProp="children">
-										{cate.map((item, index) => <Select.Option value={item._id} key={index + 1}>{item.name}</Select.Option>)}
+									<Select
+										style={{ width: '100%' }}
+										size="large"
+										placeholder="Lựa chọn"
+										allowClear
+										showSearch
+										optionFilterProp="children"
+									>
+										{cate.map((item, index) => (
+											<Select.Option value={item._id} key={index + 1}>
+												{item.name}
+											</Select.Option>
+										))}
 									</Select>
 								</Form.Item>
 							</Col>
@@ -215,31 +217,37 @@ const AddPro: React.FC = () => {
 						</Form.Item>
 
 						<Form.Item>
-							<Link to='/admin/products'><Button type="primary" htmlType="submit" style={{ marginRight: '20px' }}>Back</Button></Link>
-							<Button type="primary" htmlType="submit">Thêm mới</Button>
+							<Link to="/admin/products">
+								<Button type="primary" htmlType="submit" style={{ marginRight: '20px' }}>
+									Back
+								</Button>
+							</Link>
+							<Button type="primary" htmlType="submit">
+								Thêm mới
+							</Button>
 						</Form.Item>
 					</Col>
 				</Row>
 			</Form>
 		</div>
-	)
-}
+	);
+};
 
 const Breadcrumb = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
+	display: flex;
+	justify-content: space-between;
+	margin: 20px 0;
 	text-transform: uppercase;
-`
+`;
 
 const UploadWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 	background-color: #fafafa;
-    justify-content: center;
-    min-height: 300px;
-    border: 1px solid gray;
-    margin-bottom: 10px;
-`
+	justify-content: center;
+	min-height: 300px;
+	border: 1px solid gray;
+	margin-bottom: 10px;
+`;
 
 export default AddPro;
