@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom';
 import AdminLayout from './admin/AdminLayout';
 import AddCate from './admin/components/cate/AddCate';

@@ -98,7 +98,7 @@ const Footer = () => {
                       <Link to=''>
                         <strong>1800.2063</strong>
                       </Link>
-                       (8h00 - 21h30)
+                      (8h00 - 21h30)
                     </div>
                   </li>
                 </ul>

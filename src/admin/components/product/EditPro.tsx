@@ -12,7 +12,7 @@ import { editPro, listOnePro } from "../../../api/products";
 import styled from 'styled-components';
 
 const { TextArea } = Input
-const { Option } = Select;
+
 
 const EditPro: React.FC = () => {
 	const navigate = useNavigate()
@@ -250,11 +250,6 @@ const Breadcrumb = styled.div`
     margin: 20px 0;
 	text-transform: uppercase;
 `
-
-const Label = styled.div`
-	font-size: 13px;
-`
-
 const UploadWrapper = styled.div`
     display: flex;
     flex-direction: column;

@@ -10,6 +10,7 @@ const AddCate: React.FC = () => {
         console.log('Success:', values);
         try {
             const data = await addCate(values)
+            console.log(data);
             message.success("Thêm mới thành công")
             navigate('/admin/categories')
         } catch (err) {
@@ -61,8 +62,5 @@ const Breadcrumb = styled.div`
     justify-content: space-between;
     margin: 20px 0;
     text-transform: uppercase;
-`
-const Label = styled.div`
-	font-size: 13px;
 `
 export default AddCate;

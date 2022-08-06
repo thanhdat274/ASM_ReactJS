@@ -12,7 +12,6 @@ import { addPro } from "../../../api/products";
 import styled from 'styled-components';
 
 const { TextArea } = Input
-const { Option } = Select;
 
 const AddPro: React.FC = () => {
 	const navigate = useNavigate()
@@ -233,9 +232,6 @@ const Breadcrumb = styled.div`
 	text-transform: uppercase;
 `
 
-const Label = styled.div`
-	font-size: 13px;
-`
 const UploadWrapper = styled.div`
     display: flex;
     flex-direction: column;

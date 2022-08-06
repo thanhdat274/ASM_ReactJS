@@ -1,12 +1,24 @@
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Form, Input, message } from 'antd';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { signin } from '../../../api/user';
 
 const Signin: React.FC = () => {
-    const onFinish = (values: any) => {
+    const navigate = useNavigate()
+    const onFinish = async (values: any) => {
         console.log('Success:', values);
+        try {
+            const data = await signin(values)
+            console.log(data.data);
+            message.success("Đăng nhập tài khoản thành công, chuyển sang trang đăng nhập sau 2s");
+            setTimeout(() => {
+                navigate("/");
+            }, 2000);
+        } catch (err) {
+            console.log(err);
+            message.error("Tên tài khoản đã được đăng kí rồi");
+        }
     };
-
     const onFinishFailed = (errorInfo: any) => {
         console.log('Failed:', errorInfo);
     };
@@ -20,32 +32,53 @@ const Signin: React.FC = () => {
                             <h2 className="mt-6 text-center text-2xl font-extrabold text-[#e11b1e] uppercase">ĐĂNG NHẬP VÀO Tài khoản THÀNH VIÊN SMEMBER</h2>
                             <p className="mt-2 text-center text-sm text-gray-600" />
                         </div>
-                        <form className="space-y-6" data-sb-form-api-token="API_TOKEN">
-                            <div className="mt-4">
-                                <label className="block" htmlFor="email">Địa chỉ email <span className="text-red-500">*</span></label>
-                                <input type="text" className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600" />
-                            </div>
-                            <div className="mt-4">
-                                <label className="block">Mật khẩu <span className="text-red-500">*</span></label>
-                                <input type="password" className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600" />
-                            </div>
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-start">
-                                    <div className="flex items-center h-5">
-                                        <input type="checkbox" className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
-                                    </div>
-                                    <div className="ml-3 text-sm">
-                                        <label htmlFor="comments" className="text-gray-500 cursor-pointer">Remember me</label>
-                                    </div>
+                        <div className="space-y-6">
+                            <Form
+                                initialValues={{}}
+                                onFinish={onFinish}
+                                onFinishFailed={onFinishFailed}
+                                autoComplete="on"
+                                labelCol={{ span: 24 }}
+                                data-sb-form-api-token="API_TOKEN"
+                            >
+                                <div className="mt-6">
+                                    <Form.Item
+                                        name="email"
+                                        labelCol={{ span: 24 }}
+                                        label="Email"
+                                        rules={[{ required: true, message: 'Email không được trống!' }]}
+                                    >
+                                        <Input size="large" />
+                                    </Form.Item>
                                 </div>
-                                <Link to="/forgetPass" className="text-sm text-[#d70018] hover:underline">Forgot Password?</Link>
-                            </div>
-                            <div>
-                                <button className="w-full px-4 py-2 font-medium text-center text-white transition-colors duration-200 rounded-md bg-[#d70018] rounded-lg hover:bg-[#d70018] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-darker">
-                                    Đăng nhập
-                                </button>
-                            </div>
-                        </form>
+                                <div className="mt-6">
+                                    <Form.Item
+                                        name="password"
+                                        labelCol={{ span: 24 }}
+                                        label="Mật khẩu"
+                                        rules={[{ required: true, message: 'Mật khẩu không được trống!' }]}
+                                    >
+                                        <Input type="password" size="large" />
+                                    </Form.Item>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-start">
+                                        <div className="flex items-center h-5">
+                                            <input type="checkbox" className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                                        </div>
+                                        <div className="ml-3 text-sm">
+                                            <label htmlFor="comments" className="text-gray-500 cursor-pointer">Remember me</label>
+                                        </div>
+                                    </div>
+                                    <Link to="/forgetPass" className="text-sm text-[#d70018] hover:underline">Forgot Password?</Link>
+                                </div>
+                                <div className='mt-6'>
+                                    <button className="w-full px-4 py-2 font-medium text-center text-white transition-colors duration-200 rounded-md bg-[#d70018] rounded-lg hover:bg-[#d70018] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-darker">
+                                        Đăng nhập
+                                    </button>
+                                </div>
+                            </Form>
+                        </div>
                         <div className="flex items-center justify-center space-x-2 flex-nowrap">
                             <span className="w-20 h-px bg-gray-300" />
                             <span>OR</span>
