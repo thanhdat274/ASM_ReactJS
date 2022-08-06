@@ -77,7 +77,7 @@ const AddPro: React.FC = () => {
 	};
 
 	return (
-		<>
+		<div className="mt-[20px]">
 			<Breadcrumb>
 				<Typography.Title level={2} style={{ margin: 0 }}>
 					Thêm mới sản phẩm
@@ -221,7 +221,7 @@ const AddPro: React.FC = () => {
 					</Col>
 				</Row>
 			</Form>
-		</>
+		</div>
 	)
 }
 

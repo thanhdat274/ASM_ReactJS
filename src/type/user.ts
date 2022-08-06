@@ -5,6 +5,6 @@ export type UserType ={
     password: string,
     phone: string,
     address: string,
-    img: string,
+    image: string,
     role: number
 }

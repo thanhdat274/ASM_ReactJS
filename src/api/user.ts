@@ -9,7 +9,7 @@ export const listOneUser = (id: string) =>{
     const url = `/user/${id}`
     return instance.get(url);
 }
-export const deleteUser =(id:string)=>{
+export const deleteUser =(id: string)=>{
     const url = `/user/${id}`
     return instance.delete(url)
 }

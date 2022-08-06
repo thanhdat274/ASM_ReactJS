@@ -22,28 +22,17 @@ const ListUser = () => {
       render: text => <p style={{ width: '200px' }}>{text}</p>,
     },
     {
-      title: 'Giá gốc',
-      dataIndex: 'price',
-      key: 'price',
-    },
-    {
-      title: 'Giá khuyến mãi',
-      dataIndex: 'sale_price',
-      key: 'sale_price',
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
     },
     {
       title: 'Hình ảnh',
       dataIndex: 'image',
       key: 'image',
       render: (text: string, record: UserType) => {
-        return <Image width={200} src={text} />;
+        return <Image width={300} src={text} />;
       },
-    },
-    {
-      title: 'Mô tả',
-      dataIndex: 'desc',
-      key: 'desc',
-      render: text => <p style={{ width: '500px' }}>{text}</p>,
     },
     {
       title: 'Action',
