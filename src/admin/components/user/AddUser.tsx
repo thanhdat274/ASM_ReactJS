@@ -64,7 +64,7 @@ const AddUser: React.FC = () => {
     <div >
       <Breadcrumb>
         <Typography.Title level={2} style={{ margin: 0 }}>
-          Thêm mới tào khoản
+          Thêm mới tài khoản
         </Typography.Title>
       </Breadcrumb>
 

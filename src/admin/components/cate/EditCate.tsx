@@ -9,30 +9,31 @@ const EditCate: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate()
   const [form] = Form.useForm();
-	const [cate, setCate] = useState([])
-  
-	useEffect(() => {
-		const getCate = async (id: string) => {
-			const { data } = await listOneCate(id);
-			console.log(id);
-			console.log(data);
-			form.setFieldsValue(data);
-		};
+  const [cate, setCate] = useState([])
 
-		getCate(id as string);
-	}, []);
+  useEffect(() => {
+    const getCate = async (id: string) => {
+      const { data } = await listOneCate(id);
+      console.log(id);
+      console.log(data);
+      form.setFieldsValue(data);
+    };
+
+    getCate(id as string);
+  }, []);
   const onFinish = async (values: any) => {
     console.log('Success:', values);
     const valueEdit = {
-			id: id,
-			name: values.name,
-		};
+      _id: id,
+      name: values.name,
+    };
+    console.log(valueEdit);
     try {
       const data = await update(valueEdit)
       message.success("Cập nhật thành công")
       navigate('/admin/categories')
       console.log(data);
-      
+
     } catch (err) {
       message.error("Có lỗi xảy ra")
     }
@@ -40,7 +41,7 @@ const EditCate: React.FC = () => {
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
-  
+
   return (
     <>
       <Breadcrumb>
@@ -51,7 +52,7 @@ const EditCate: React.FC = () => {
       <Row gutter={16}>
         <Col span={16}>
           <Form
-          form={form}
+            form={form}
             initialValues={cate}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}

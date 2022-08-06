@@ -35,6 +35,12 @@ const ListUser = () => {
       },
     },
     {
+      title: 'Chức vụ',
+      dataIndex: 'role',
+      key: 'role',
+      render: text => <p style={{ width: '200px' }}>{text ? 'Nhân viên' : 'Khách hàng'}</p>,
+    },
+    {
       title: 'Action',
       key: 'action',
       render: (record: UserType) => (

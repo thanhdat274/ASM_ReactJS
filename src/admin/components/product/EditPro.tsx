@@ -52,7 +52,7 @@ const EditPro: React.FC = () => {
 			values.image = await upload(file);
 		}
 		const valueEdit = {
-			id: id,
+			_id: id,
 			image: values.image,
 			name: values.name,
 			price: values.price,
@@ -96,7 +96,7 @@ const EditPro: React.FC = () => {
 	};
 
 	return (
-		<div className="mt-[20px]">
+		<>
 			<Breadcrumb>
 				<Typography.Title level={2} style={{ margin: 0 }}>
 					Cập nhât sản phẩm
@@ -240,7 +240,7 @@ const EditPro: React.FC = () => {
 					</Col>
 				</Row>
 			</Form>
-		</div>
+		</>
 	)
 }
 
