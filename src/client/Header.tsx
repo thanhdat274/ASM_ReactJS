@@ -1,15 +1,16 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
   return (
     <div className="header-top">
       <div className="header-container">
         <div className="navbar">
-          <a href="/" className="nav-brand">
+          <Link to="/" className="nav-brand">
             <div className="box-logo-desktop">
               <img src="https://cdn.sforum.vn/sforum/wp-content/uploads/2021/08/logo_cps-1.png" alt='' className="header-img" />
             </div>
-          </a>
+          </Link>
           <div className="box-search">
             <form method="get">
               <input type="text" className="search" autoComplete="off" placeholder="Tìm kiếm sản phẩm ..." />
@@ -18,7 +19,7 @@ const Header = () => {
               </button>
             </form>
           </div>
-          <a href="/" className="header-item">
+          <Link to="/" className="header-item">
             <div className="about__box-icon">
               <i className="fa-solid fa-phone" />
             </div>
@@ -29,8 +30,8 @@ const Header = () => {
                 1800.2044
               </p>
             </div>
-          </a>
-          <a href="/" className="header-item">
+          </Link>
+          <Link to="/" className="header-item">
             <div className="about__box-icon">
               <i className="fa-solid fa-location-dot" />
             </div>
@@ -41,8 +42,8 @@ const Header = () => {
                 gần bạn
               </p>
             </div>
-          </a>
-          <a href="/" className="header-item">
+          </Link>
+          <Link to="/" className="header-item">
             <div className="about__box-icon">
               <i className="fa-solid fa-truck" />
             </div>
@@ -53,8 +54,8 @@ const Header = () => {
                 đơn hàng
               </p>
             </div>
-          </a>
-          <a href="/" className="header-item about__cart">
+          </Link>
+          <Link to="/" className="header-item about__cart">
             <div className="about__box-icon">
               <i className="fa-solid fa-basket-shopping-simple" />
             </div>
@@ -65,15 +66,15 @@ const Header = () => {
                 hàng
               </p>
             </div>
-          </a>
-          <a href="/" className="header-item">
+          </Link>
+          <Link to="/signin" className="header-item">
             <div className="about__box-icon">
               <i className="fa-solid fa-circle-user" style={{ textAlign: 'center' }} />
               <div className="about__box-content">
                 <p className="" style={{ textAlign: 'center' }}>Smember</p>
               </div>
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

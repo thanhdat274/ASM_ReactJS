@@ -15,6 +15,7 @@ import AddUser from './admin/components/user/AddUser';
 import EditPro from './admin/components/product/EditPro';
 import EditCate from './admin/components/cate/EditCate';
 import EditUSer from './admin/components/user/EditUSer';
+import Signup from './client/components/auth/signup';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route index element={<Home />} />
           {/* phần auth */}
           <Route path='signin' element={<Signin />} />
+          <Route path='signup' element={<Signup />} />
         </Route>
         {/* phần admin */}
         <Route path='/admin' element={<AdminLayout />}>

@@ -230,6 +230,7 @@ const Breadcrumb = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 20px 0;
+	text-transform: uppercase;
 `
 
 const Label = styled.div`

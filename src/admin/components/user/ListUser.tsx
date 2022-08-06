@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { deleteUser, listUser } from '../../../api/user';
 import { UserType } from '../../../type/user';
-import { CateType } from '../../../type/category';
 
 const ListUser = () => {
   const [dataTable, setDataTable] = useState<UserType[]>([]);
@@ -49,7 +48,7 @@ const ListUser = () => {
     {
       title: 'Action',
       key: 'action',
-      render: (record: CateType) => (
+      render: (record: UserType) => (
         <Space size="middle">
           <Link to={`${record._id}/edit`}><button style={{ border: '0px', fontSize: '20px' }} onClick={() => console.log(`${record._id}`)} > <EditOutlined /></button></Link>
           <button style={{ border: '0px', fontSize: '20px' }} ><DeleteOutlined style={{ color: "red" }} onClick={() => {onDelete(record._id as string) }} /></button>
@@ -93,7 +92,7 @@ const ListUser = () => {
         <Typography.Title level={2} style={{ margin: 0 }}>
           Danh sách tài khoản
         </Typography.Title>
-        <Link to="/admin/products/add">
+        <Link to="/admin/user/add">
           <Button type="dashed" shape="circle" icon={<PlusOutlined />} />
         </Link>
       </Breadcrumb>
@@ -106,6 +105,7 @@ const Breadcrumb = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    text-transform: uppercase;
 `
 
 export default ListUser
