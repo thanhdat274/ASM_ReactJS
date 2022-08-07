@@ -9,10 +9,17 @@ import styled from 'styled-components';
 
 const ListCate = () => {
   const [cate, setCate] = useState<CateType[]>([]);
+  const data = cate.map((item, index) => {
+    return {
+      key: index + 1,
+      _id: item._id,
+      name: item.name,
+    };
+  });
   const columns: ColumnsType<CateType> = [
     {
       title: 'ID',
-      dataIndex: 'id',
+      dataIndex: 'key',
       key: 'id',
     },
     {
@@ -79,7 +86,7 @@ const ListCate = () => {
           <Button type="dashed" shape="circle" icon={<PlusOutlined />} />
         </Link>
       </Breadcrumb>
-      <Table columns={columns} dataSource={cate} />
+      <Table columns={columns} dataSource={data} />
     </>
   );
 };

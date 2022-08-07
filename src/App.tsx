@@ -3,7 +3,7 @@ import AdminLayout from './admin/AdminLayout';
 import AddCate from './admin/components/cate/AddCate';
 import ListCate from './admin/components/cate/ListCate';
 import Dashboard from './admin/Dashboard';
-import './index.css'
+import './index.css';
 import Signin from './client/components/auth/signin';
 import Home from './client/components/Home';
 import UserLayout from './client/UserLayout';
@@ -15,7 +15,7 @@ import EditPro from './admin/components/product/EditPro';
 import EditCate from './admin/components/cate/EditCate';
 import EditUSer from './admin/components/user/EditUSer';
 import Signup from './client/components/auth/signup';
-
+import ProductDetail from './client/components/product/productDetail';
 
 function App() {
   return (
@@ -25,35 +25,36 @@ function App() {
         <Route path="/" element={<UserLayout />}>
           <Route index element={<Home />} />
           {/* phần auth */}
-          <Route path='signin' element={<Signin />} />
-          <Route path='signup' element={<Signup />} />
+          <Route path="signin" element={<Signin />} />
+          <Route path="signup" element={<Signup />} />
+          {/* phàn product */}
+          <Route path="products/:id" element={<ProductDetail />} />
         </Route>
         {/* phần admin */}
-        <Route path='/admin' element={<AdminLayout />}>
+        <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Dashboard />} />
           {/* Phần danh mục */}
-          <Route path='categories'>
+          <Route path="categories">
             <Route index element={<ListCate />} />
-            <Route path='add' element={<AddCate />} />
-            <Route path=':id/edit' element={<EditCate />} />
+            <Route path="add" element={<AddCate />} />
+            <Route path=":id/edit" element={<EditCate />} />
           </Route>
           {/* phần sản phẩm */}
-          <Route path='products'>
+          <Route path="products">
             <Route index element={<ListPro />} />
-            <Route path='add' element={<AddPro />} />
-            <Route path=':id/edit' element={<EditPro />} />
+            <Route path="add" element={<AddPro />} />
+            <Route path=":id/edit" element={<EditPro />} />
           </Route>
           {/* Phần user */}
-          <Route path='user'>
+          <Route path="user">
             <Route index element={<ListUser />} />
-            <Route path='add' element={<AddUser />} />
-            <Route path=':id/edit' element={<EditUSer />} />
+            <Route path="add" element={<AddUser />} />
+            <Route path=":id/edit" element={<EditUSer />} />
           </Route>
         </Route>
-
       </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

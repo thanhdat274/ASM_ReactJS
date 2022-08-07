@@ -9,11 +9,26 @@ import { getAll, remove } from '../../../api/products';
 import styled from 'styled-components';
 
 const ListPro = () => {
-  const [dataTable, setDataTable] = useState<ProductType[]>([]);
+  const [pro, setPro] = useState<ProductType[]>([]);
+  const data = pro.map((item, index) => {
+    return {
+      key: index + 1,
+      _id: item._id,
+      image: item.image,
+      name: item.name,
+      price: item.price,
+      sale_price: item.sale_price,
+      quantity: item.quantity,
+      desc_img: item.desc_img,
+      desc: item.desc,
+      short_desc: item.short_desc,
+      cateId: item.cateId,
+    };
+  });
   const columns: ColumnsType<ProductType> = [
     {
       title: 'ID',
-      dataIndex: 'id',
+      dataIndex: 'key',
       key: 'id',
     },
     {
@@ -74,7 +89,7 @@ const ListPro = () => {
     const fetchData = async () => {
       try {
         const data = await getAll();
-        setDataTable(data.data);
+        setPro(data.data);
         console.log(data.data);
       } catch (err) {
         console.log(err);
@@ -91,7 +106,7 @@ const ListPro = () => {
       onOk: async () => {
         const { data } = await remove(id);
         if (data) {
-          setDataTable(dataTable.filter((item) => item._id !== id));
+          setPro(pro.filter((item) => item._id !== id));
         }
         message.success('Xóa thành công');
       },
@@ -108,7 +123,7 @@ const ListPro = () => {
           <Button type="dashed" shape="circle" icon={<PlusOutlined />} />
         </Link>
       </Breadcrumb>
-      <Table columns={columns} dataSource={dataTable} />
+      <Table columns={columns} dataSource={data} />
     </>
   );
 };

@@ -22,3 +22,8 @@ export const update = (data: CateType) => {
     const url = `/category/${data._id}`
     return instance.put(url, data);
 }
+// hàm load dữ liệu của cate để lấy tên
+export const detailCategory = (id: any) => {
+    const url = `/category/${id}`;
+    return instance.get(url);
+};

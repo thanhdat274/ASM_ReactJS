@@ -9,7 +9,7 @@ const UserLayout = () => {
       <header>
         <Header />
       </header>
-      <section className="container">
+      <section >
         <Outlet />
       </section>
       <footer>

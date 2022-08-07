@@ -16,7 +16,7 @@ const Signin: React.FC = () => {
       }, 2000);
     } catch (err) {
       console.log(err);
-      message.error("Tên tài khoản hoặc mật khẩu không đúng!");
+      message.error('Tên tài khoản hoặc mật khẩu không đúng!');
     }
   };
   const onFinishFailed = (errorInfo: any) => {

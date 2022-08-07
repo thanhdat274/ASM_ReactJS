@@ -22,3 +22,10 @@ export const editPro = (data: ProductType) => {
     const url = `/products/${data._id}`
     return instance.put(url, data);
 }
+
+// hàm load sản phẩm theo dnah mục
+export const similarProduct = (cateId: string) => {
+    console.log(cateId);
+    const url = `/products?cateId=${cateId}&_limit=6`;
+    return instance.get(url);
+};

@@ -8,7 +8,20 @@ import { deleteUser, listUser } from '../../../api/user';
 import { UserType } from '../../../type/user';
 
 const ListUser = () => {
-  const [dataTable, setDataTable] = useState<UserType[]>([]);
+  const [user, setUser] = useState<UserType[]>([]);
+  const data = user.map((item, index) => {
+    return {
+      key: index + 1,
+      _id: item._id,
+      image: item.image,
+      name: item.name,
+      email: item.email,
+      password: item.password,
+      phone: item.phone,
+      address: item.address,
+      role: item.role,
+    };
+  });
   const columns: ColumnsType<UserType> = [
     {
       title: 'ID',
@@ -68,7 +81,7 @@ const ListUser = () => {
     const fetchData = async () => {
       try {
         const data = await listUser();
-        setDataTable(data.data);
+        setUser(data.data);
         console.log(data.data);
       } catch (err) {
         console.log(err);
@@ -85,7 +98,7 @@ const ListUser = () => {
       onOk: async () => {
         const { data } = await deleteUser(id);
         if (data) {
-          setDataTable(dataTable.filter((item) => item._id !== id));
+          setUser(user.filter((item) => item._id !== id));
         }
         message.success('Xóa thành công');
       },
@@ -102,7 +115,7 @@ const ListUser = () => {
           <Button type="dashed" shape="circle" icon={<PlusOutlined />} />
         </Link>
       </Breadcrumb>
-      <Table columns={columns} dataSource={dataTable} />
+      <Table columns={columns} dataSource={data} />
     </>
   );
 };
