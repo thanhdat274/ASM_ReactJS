@@ -59,7 +59,7 @@ const Header = () => {
               </p>
             </div>
           </Link>
-          <Link to="/" className="header-item about__cart">
+          <Link to="/cart" className="header-item about__cart">
             <div className="about__box-icon">
               <i className="fa-solid fa-basket-shopping-simple" />
             </div>

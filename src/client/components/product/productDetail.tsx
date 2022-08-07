@@ -4,29 +4,44 @@ import { ProductType } from '../../../type/Product';
 import { CateType } from '../../../type/category';
 import { listOnePro, similarProduct } from '../../../api/products';
 import { detailCategory } from '../../../api/category';
+import { useDispatch } from 'react-redux';
+import { message } from 'antd';
 
 const ProductDetail = () => {
   const { id } = useParams();
+  console.log(id);
+  
   const [pro, setPro] = useState<ProductType>();
   const [cate, setCate] = useState<CateType>();
   const [similarpr, setSimilarpr] = useState<ProductType[]>([]);
+
   useEffect(() => {
-    const getProduct = async () => {
-      const { data } = await listOnePro(id as string);
+    const getProduct = async (id: string) => {
+      const { data } = await listOnePro(id);
       setPro(data);
       console.log(data);
       // biến gọi hàm load 1 cate
       const resCate = await detailCategory(data.cateId);
       setCate(resCate.data);
-      console.log(resCate.data);
+   
       // hàm load dữ liệu của sản phẩm cùng loại
       const similarProductRes = await similarProduct(data.cateId);
       setSimilarpr(similarProductRes.data);
-      console.log(similarProductRes.data);
     };
-    getProduct();
+    getProduct(id as string);
   }, [id]);
+  
+  const dispatch = useDispatch();
 
+  const addToCart = (item: any) => {
+    message.success("Thêm vào giỏ hàng thành công");
+
+    item.quantity1 = 1;
+    dispatch({
+      type: "cart/add",
+      payload: item,
+    });
+  };
   return (
     <div>
       <main className="my-[20px]">
@@ -83,7 +98,9 @@ const ProductDetail = () => {
                   </div>
                 </div>
                 <div className="mt-7">
-                  <button className="bg-red-500 h-10 w-44 rounded-sm text-white">
+                  <button className="bg-red-500 h-10 w-44 rounded-sm text-white" onClick={()=>{
+                    addToCart(pro);
+                  }}>
                     <i className="fa-solid fa-cart-plus"></i> Thêm vào giỏ hàng
                   </button>
                 </div>
@@ -106,7 +123,7 @@ const ProductDetail = () => {
             </div>
             <div className="w-[1080px] my-[20px]">
               <div className="product-list">
-                {similarpr
+                {similarpr && similarpr
                   .filter((item) => item._id !== pro?._id)
                   .map((item, index) => {
                     return (

@@ -25,7 +25,6 @@ export const editPro = (data: ProductType) => {
 
 // hàm load sản phẩm theo dnah mục
 export const similarProduct = (cateId: string) => {
-    console.log(cateId);
-    const url = `/products?cateId=${cateId}&_limit=6`;
+    const url = `/products?cateId=${cateId}&_limit=5`;
     return instance.get(url);
 };

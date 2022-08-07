@@ -17,6 +17,7 @@ import EditUSer from './admin/components/user/EditUSer';
 import Signup from './client/components/auth/signup';
 import ProductDetail from './client/components/product/productDetail';
 import PrivateRouter from './admin/PrivateRouter';
+import Cart from './client/components/Cart';
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
           {/* phần auth */}
           <Route path="signin" element={<Signin />} />
           <Route path="signup" element={<Signup />} />
+          {/* phần cart */}
+          <Route path="cart" element={<Cart />} />
           {/* phàn product */}
           <Route path="products/:id" element={<ProductDetail />} />
         </Route>
