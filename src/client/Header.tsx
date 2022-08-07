@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
+  const [auth, setAuth] = useState<any>();
+  useEffect(() => {
+    const getA = () => {
+      setAuth(JSON.parse(localStorage.getItem("user") as string));
+    };
+    getA();
+  }, []);
   return (
     <div className="header-top">
       <div className="header-container">
@@ -71,7 +78,8 @@ const Header = () => {
               </p>
             </div>
           </Link>
-          <Link to="/signin" className="header-item">
+          {auth && auth ?(
+            <Link to="/smember" className="header-item">
             <div className="about__box-icon">
               <i className="fa-solid fa-circle-user" style={{ textAlign: 'center' }} />
               <div className="about__box-content">
@@ -81,6 +89,18 @@ const Header = () => {
               </div>
             </div>
           </Link>
+          ):(
+            <Link to="/signin" className="header-item">
+            <div className="about__box-icon">
+              <i className="fa-solid fa-circle-user" style={{ textAlign: 'center' }} />
+              <div className="about__box-content">
+                <p className="" style={{ textAlign: 'center' }}>
+                  Smember
+                </p>
+              </div>
+            </div>
+          </Link>
+          )}
         </div>
       </div>
     </div>

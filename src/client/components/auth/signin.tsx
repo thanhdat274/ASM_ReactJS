@@ -15,6 +15,7 @@ const Signin: React.FC = () => {
         message.success('Đăng nhập tài khoản thành công, chuyển sang trang đăng nhập sau 2s');
         setTimeout(() => {
           navigate('/');
+          window.location.reload();
         }, 2000);
       }
     } catch (err) {

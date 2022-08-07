@@ -25,7 +25,7 @@ const ListUser = () => {
   const columns: ColumnsType<UserType> = [
     {
       title: 'ID',
-      dataIndex: 'id',
+      dataIndex: 'key',
       key: 'id',
     },
     {
@@ -44,7 +44,7 @@ const ListUser = () => {
       dataIndex: 'image',
       key: 'image',
       render: (text: string, record: UserType) => {
-        return <Image width={300} src={text} />;
+        return <Image width={100} src={text} />;
       },
     },
     {

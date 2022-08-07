@@ -1,5 +1,5 @@
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, message, Modal, Space, Table, Typography } from 'antd';
+import { Button, Image, message, Modal, Space, Table, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -14,6 +14,7 @@ const ListCate = () => {
       key: index + 1,
       _id: item._id,
       name: item.name,
+      link_image: item.link_image,
     };
   });
   const columns: ColumnsType<CateType> = [
@@ -26,6 +27,14 @@ const ListCate = () => {
       title: 'Tên danh mục',
       dataIndex: 'name',
       key: 'name',
+    },
+    {
+      title: 'Hình ảnh danh mục',
+      dataIndex: 'link_image',
+      key: 'link_image',
+      render: (text: string, record: CateType) => {
+        return <Image width={100} src={text} />;
+      },
     },
     {
       title: 'Action',

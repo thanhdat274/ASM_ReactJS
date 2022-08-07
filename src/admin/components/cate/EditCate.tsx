@@ -25,6 +25,7 @@ const EditCate: React.FC = () => {
     const valueEdit = {
       _id: id,
       name: values.name,
+      link_image: values.link_image,
     };
     console.log(valueEdit);
     try {

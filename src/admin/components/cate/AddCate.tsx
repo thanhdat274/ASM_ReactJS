@@ -39,8 +39,16 @@ const AddCate: React.FC = () => {
             <Form.Item
               name="name"
               labelCol={{ span: 24 }}
-              label="Tên sản phẩm"
+              label="Tên danh mục"
               rules={[{ required: true, message: 'Tên danh mục không được trống!' }]}
+            >
+              <Input size="large" />
+            </Form.Item>
+            <Form.Item
+              name="link_image"
+              labelCol={{ span: 24 }}
+              label="Hình ảnh dnah mục"
+              rules={[{ required: true, message: 'Đường link ảnh danh mục không được trống!' }]}
             >
               <Input size="large" />
             </Form.Item>

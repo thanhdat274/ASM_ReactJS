@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 const Cart = () => {
   const { cart, total }: any = useSelector((store) => store);
   console.log(total);
-  
 
   const dipatch = useDispatch();
   return (
@@ -111,9 +110,11 @@ const Cart = () => {
             <button className="w-[600px] h-[50px] bg-[#d70018] text-white mb-[20px] uppercase font-semibold  rounded-[10px]">
               Tiến hành đặt hàng
             </button>
-            <button className="w-[600px] h-[50px] border-[1px] border-red-500 text-red-500 uppercase font-semibold hover:bg-[#dc3545] hover:text-white rounded-[10px]">
-              Chọn thêm sản phẩm khác
-            </button>
+            <Link to="/">
+              <div className="max-w-[600px] h-[50px] border-[1px] border-red-500 text-red-500 uppercase font-semibold hover:bg-[#dc3545] hover:text-white rounded-[10px] flex justify-center items-center">
+                Chọn thêm sản phẩm khác
+              </div>
+            </Link>
           </div>
         </div>
       </main>

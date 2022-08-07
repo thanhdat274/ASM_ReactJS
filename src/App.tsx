@@ -18,6 +18,8 @@ import Signup from './client/components/auth/signup';
 import ProductDetail from './client/components/product/productDetail';
 import PrivateRouter from './admin/PrivateRouter';
 import Cart from './client/components/Cart';
+import ProductList from './client/components/product/ProductList';
+import ThongTinAccount from './client/components/thong-tin/thong-tin';
 
 function App() {
   return (
@@ -31,6 +33,11 @@ function App() {
           <Route path="signup" element={<Signup />} />
           {/* phần cart */}
           <Route path="cart" element={<Cart />} />
+          {/* phần quản lý thông tin cá nhân */}
+          <Route path="smember" element={<ThongTinAccount />} />
+          
+          {/* phàn sản phảm theo danh mục */}
+          <Route path="category/:id" element={<ProductList />} />
           {/* phàn product */}
           <Route path="products/:id" element={<ProductDetail />} />
         </Route>
