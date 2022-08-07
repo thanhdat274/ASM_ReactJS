@@ -8,12 +8,15 @@ const Signin: React.FC = () => {
   const onFinish = async (values: any) => {
     console.log('Success:', values);
     try {
-      const data = await signin(values);
-      console.log(data.data);
-      message.success('Đăng nhập tài khoản thành công, chuyển sang trang đăng nhập sau 2s');
-      setTimeout(() => {
-        navigate('/');
-      }, 2000);
+      const { data } = await signin(values);
+      console.log(data);
+      if (data) {
+        localStorage.setItem('user', JSON.stringify(data));
+        message.success('Đăng nhập tài khoản thành công, chuyển sang trang đăng nhập sau 2s');
+        setTimeout(() => {
+          navigate('/');
+        }, 2000);
+      }
     } catch (err) {
       console.log(err);
       message.error('Tên tài khoản hoặc mật khẩu không đúng!');
@@ -82,7 +85,7 @@ const Signin: React.FC = () => {
                   </Link>
                 </div>
                 <div className="mt-6">
-                  <button className="w-full px-4 py-2 font-medium text-center text-white transition-colors duration-200 rounded-md bg-[#d70018] rounded-lg hover:bg-[#d70018] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-darker">
+                  <button className="w-full px-4 py-2 font-medium text-center text-white transition-colors duration-200 rounded-md  bg-[#d70018]  hover:bg-[#d70018] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-darker">
                     Đăng nhập
                   </button>
                 </div>

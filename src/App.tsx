@@ -16,6 +16,7 @@ import EditCate from './admin/components/cate/EditCate';
 import EditUSer from './admin/components/user/EditUSer';
 import Signup from './client/components/auth/signup';
 import ProductDetail from './client/components/product/productDetail';
+import PrivateRouter from './admin/PrivateRouter';
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
           <Route path="products/:id" element={<ProductDetail />} />
         </Route>
         {/* phần admin */}
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}>
           <Route index element={<Dashboard />} />
           {/* Phần danh mục */}
           <Route path="categories">

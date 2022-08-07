@@ -16,7 +16,7 @@ const Signup = () => {
       }, 2000);
     } catch (err) {
       console.log(err);
-      message.error('Tên tài khoản đã được đăng kí rồi');
+      message.error('Email đã được đăng kí rồi');
     }
   };
   const onFinishFailed = (errorInfo: any) => {
