@@ -16,21 +16,23 @@ const ProductDetail = () => {
   const [similarpr, setSimilarpr] = useState<ProductType[]>([]);
 
   useEffect(() => {
-    const getProduct = async (id: string) => {
-      const { data } = await listOnePro(id);
+    const getProduct = async () => {
+      const { data } = await listOnePro(id as string);
       setPro(data);
       console.log(data);
+      
       // biến gọi hàm load 1 cate
       const resCate = await detailCategory(data.cateId);
       setCate(resCate.data);
-   
+      console.log( 'id',resCate.data);
+      
       // hàm load dữ liệu của sản phẩm cùng loại
       const similarProductRes = await similarProduct(data.cateId);
       setSimilarpr(similarProductRes.data);
-      console.log(similarProductRes.data);
+      console.log('sản phẩm',similarProductRes.data);
       
     };
-    getProduct(id as string);
+    getProduct();
   }, [id]);
   
   const dispatch = useDispatch();
@@ -125,7 +127,7 @@ const ProductDetail = () => {
             </div>
             <div className="w-[1080px] my-[20px]">
               <div className="product-list">
-                {similarpr && similarpr
+                {similarpr
                   .filter((item) => item._id !== pro?._id)
                   .map((item, index) => {
                     return (

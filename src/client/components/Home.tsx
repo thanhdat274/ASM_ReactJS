@@ -31,9 +31,9 @@ const Home = () => {
           <div className="menu-wrapper">
             <div className="menu-tree">
               <ul className="menu-tree">
-                {cate.map((item) => {
+                {cate.map((item, index) => {
                   return (
-                    <li className="label-menu-tree">
+                    <li key={index} className="label-menu-tree">
                       <Link to={`category/${item._id}`} className="label-item">
                         <img
                           className="icons-cate"
@@ -169,9 +169,9 @@ const Home = () => {
             </div> */}
           </div>
           <div className="product-list">
-            {pro.map((item) => {
+            {pro.map((item, index) => {
               return (
-                <div className="product">
+                <div key={index} className="product">
                   <Link to={`/products/${item._id}`} className="product">
                     <div className="product-img">
                       <img src={item.image} alt="" className="img-product" />
