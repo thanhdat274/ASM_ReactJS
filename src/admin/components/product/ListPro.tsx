@@ -59,7 +59,7 @@ const ListPro = () => {
       title: 'Mô tả',
       dataIndex: 'desc',
       key: 'desc',
-      render: (text) => <p style={{ width: '500px' }}>{text}</p>,
+      render: (text) => <textarea cols={6} rows={12} style={{ width: '500px' }}>{text}</textarea>,
     },
     {
       title: 'Action',

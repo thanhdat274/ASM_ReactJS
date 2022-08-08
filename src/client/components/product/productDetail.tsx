@@ -27,6 +27,8 @@ const ProductDetail = () => {
       // hàm load dữ liệu của sản phẩm cùng loại
       const similarProductRes = await similarProduct(data.cateId);
       setSimilarpr(similarProductRes.data);
+      console.log(similarProductRes.data);
+      
     };
     getProduct(id as string);
   }, [id]);

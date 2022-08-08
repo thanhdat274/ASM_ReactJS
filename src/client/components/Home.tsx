@@ -133,12 +133,12 @@ const Home = () => {
         <div className="box-content">
           <div className="box-title">
             <Link to={'/'} className="title">
-              ĐIỆN THOẠI NỔI BẬT NHẤT
+              Tất cả sản phẩm
             </Link>
             <a href="/" className="title1">
               Xem tất cả
             </a>
-            <div className="list-tag" style={{ display: 'flex' }}>
+            {/* <div className="list-tag" style={{ display: 'flex' }}>
               <a href="/" className="related-tag">
                 Apple
               </a>
@@ -166,7 +166,7 @@ const Home = () => {
               <a href="/" className="related-tag">
                 Tecno
               </a>
-            </div>
+            </div> */}
           </div>
           <div className="product-list">
             {pro.map((item) => {
