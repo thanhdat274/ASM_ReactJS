@@ -29,6 +29,6 @@ export const detailCategory = (id: any) => {
 };
 
 export const GetPrWithCategory = (id: string) => {
-    const url = `/category/${id}/products?_sort=createdAt&_order=desc`;
+    const url = `/category/${id}?_embed=products`;
     return instance.get(url);
 };

@@ -20,9 +20,10 @@ const ProductList = () => {
       setCategories(resCategory.data);
       console.log(resCategory.data);
       
+      // phần load sản phẩm theo dnah mục
       const resProducts = await GetPrWithCategory(id as string);
-      setProducts(resProducts.data);
-      console.log(resProducts.data);
+      setProducts(resProducts.data.product);
+      console.log('sản phẩm theo danh mục',resProducts.data.product);
       
     };
     getData();
@@ -44,10 +45,10 @@ const ProductList = () => {
           <div className="text-black font-semibold">{category?.name}</div>
         </div>
 
-        <div className="w-[1440px] h-auto mx-auto">
-          <div className="w-[1080px] my-[20px]">
+        <div className="w-[1200px] h-auto mx-auto">
+          <div className="w-[1200px] my-[20px]">
             <div className="product-list">
-              {products && products.map((item: ProductType, index: number) => {
+              {products && products.map((item , index) => {
                     return (
                       <div className="product" key={index}>
                         <Link to={`/products/${item._id}`} className="product">

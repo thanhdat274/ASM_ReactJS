@@ -128,6 +128,7 @@ const ProductDetail = () => {
             <div className="w-[1080px] my-[20px]">
               <div className="product-list">
                 {similarpr
+                  .filter((item) => item.cateId === pro?.cateId)
                   .filter((item) => item._id !== pro?._id)
                   .map((item, index) => {
                     return (

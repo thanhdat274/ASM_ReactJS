@@ -105,17 +105,17 @@ const Home = () => {
             <a href="/" className="right-banner-item">
               <img
                 alt="GALAXY FOLD3 <br>Giá rẻ bất ngờ"
-                data-src="https://cdn2.cellphones.com.vn/690x300/https://dashboard.cellphones.com.vn/storage/690x300_Galaxy ZFold 311.png"
+                data-src="https://res.cloudinary.com/dvj4wwihv/image/upload/v1660663966/1_RightBanner_Galaxy_Z_Fold3_yeanwu.png"
                 className="right-banner-img"
-                src="https://cdn2.cellphones.com.vn/690x300/https://dashboard.cellphones.com.vn/storage/690x300_Galaxy ZFold 311.png"
+                src="https://res.cloudinary.com/dvj4wwihv/image/upload/v1660663966/1_RightBanner_Galaxy_Z_Fold3_yeanwu.png"
               />
             </a>
             <a href="/" className="right-banner-item">
               <img
                 alt="iPad Pro m1<br>Hiệu năng cực khủng"
-                data-src="https://cdn2.cellphones.com.vn/690x300/https://dashboard.cellphones.com.vn/storage/Ipad pro right.png"
+                data-src="https://res.cloudinary.com/dvj4wwihv/image/upload/v1660664043/RightBanner_ipad_m1_desk_u4xpic.png"
                 className="right-banner-img"
-                src="https://cdn2.cellphones.com.vn/690x300/https://dashboard.cellphones.com.vn/storage/Ipad pro right.png"
+                src="https://res.cloudinary.com/dvj4wwihv/image/upload/v1660664043/RightBanner_ipad_m1_desk_u4xpic.png"
               />
             </a>
             <a href="/" className="right-banner-item">
@@ -796,9 +796,9 @@ const Home = () => {
             <a href="/" className="brand-banner__item">
               <img
                 alt="Ưu đãi Evo"
-                data-src="https://cdn2.cellphones.com.vn/x/https://dashboard.cellphones.com.vn/storage/evo.png"
+                data-src="https://res.cloudinary.com/dvj4wwihv/image/upload/v1660664074/citi-bank-mo-the_sz4x6c.png"
                 className="brand-banner__img"
-                src="https://cdn2.cellphones.com.vn/x/https://dashboard.cellphones.com.vn/storage/evo.png"
+                src="https://res.cloudinary.com/dvj4wwihv/image/upload/v1660664074/citi-bank-mo-the_sz4x6c.png"
               />
             </a>
             <a href="/" className="brand-banner__item">
