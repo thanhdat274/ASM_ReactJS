@@ -7,7 +7,6 @@ import { ProductType } from '../../../type/Product';
 const ProductList = () => {
   const { id } = useParams();
   const [category, setCategory] = useState<CateType>();
-  const [categories, setCategories] = useState<CateType[]>([]);
   const [products, setProducts] = useState<ProductType[]>([]);
 
   useEffect(() => {
@@ -15,10 +14,6 @@ const ProductList = () => {
       const { data } = await detailCategory(id);
       setCategory(data);
       console.log(data);
-      
-      const resCategory = await listCate();
-      setCategories(resCategory.data);
-      console.log(resCategory.data);
       
       // phần load sản phẩm theo dnah mục
       const resProducts = await GetPrWithCategory(id as string);

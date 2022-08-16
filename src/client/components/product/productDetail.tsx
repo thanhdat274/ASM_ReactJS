@@ -60,7 +60,7 @@ const ProductDetail = () => {
             <i className="fa fa-angle-right" aria-hidden="true" />
           </div>
           <div className="text-black font-semibold">
-            <Link to="/" className="text-black hover:text-black font-semibold">
+            <Link to={`/category/${cate?._id}`} className="text-black hover:text-black font-semibold">
               {cate?.name}
             </Link>
           </div>
