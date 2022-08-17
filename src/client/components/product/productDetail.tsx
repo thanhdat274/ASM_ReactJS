@@ -72,7 +72,7 @@ const ProductDetail = () => {
         <div className="w-[1440px] h-auto mx-auto">
           <div className="w-[1080px] h-auto mx-auto">
             <div className="w-[1080px] py-[5px] flex border-b-2 border-[#f2f2f2]">
-              <div className="text-[24px] font-semibold w-[460px]">{pro?.name}</div>
+              <div className="text-[24px] font-semibold w-[980px]">{pro?.name}</div>
             </div>
             <div className="w-[1080px] h-auto flex justify-between mt-[20px]">
               <div className="w-[398px] h-[398px] mx-auto border flex justify-center item-center">
